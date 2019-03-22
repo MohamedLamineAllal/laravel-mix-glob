@@ -1,0 +1,32 @@
+{
+  "name": "laravel-mix-glob",
+  "version": "1.0.0",
+  "description": "Laravel mix extension that add support for glob. It wrap nicely around laravel mix. Add the glob feature, with some cool features. And allow an easy access to laravel mix instance too. Simple api. ",
+  "main": "dist/laravelMixGlob.min.js",
+  "directories": {
+    "example": "example"
+  },
+  "files": [
+    "/dist",
+    "/README.md"
+  ],
+  "dependencies": {
+    "gulp": "^4.0.0",
+    "gulp-uglify": "^3.0.1"
+  },
+  "devDependencies": {
+    "gulp-rename": "^1.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "laravel-mix",
+    "glob",
+    "feature",
+    "support",
+    "assets"
+  ],
+  "author": "Mohamed Lamine Allal",
+  "license": "MIT"
+}

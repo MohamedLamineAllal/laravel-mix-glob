@@ -1,0 +1,15 @@
+
+.summernote-wrapper {
+    $whtClr: white;
+    .note-editor {
+        .note-toolbar {
+            background-color: $whtClr;
+            .btn-group  {
+                .btn {
+                    background-color: $whtClr;
+                }
+            }
+        }
+    }
+
+}  

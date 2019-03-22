@@ -1,0 +1,22 @@
+.summernote-wrapper{
+    .note-editor.note-frame {
+        border: solid 1px #e6e6e6;
+        .note-statusbar {
+            background: transparent;
+            .note-icon-bar {
+                opacity: .4;
+            }
+        }
+
+        .note-toolbar {
+            z-index: 3 !important;   
+        }
+
+        .note-toolbar-wrapper {
+            height: auto !important;
+        }
+    }
+    .note-resizeable {
+        background: transparent;
+    }
+}
