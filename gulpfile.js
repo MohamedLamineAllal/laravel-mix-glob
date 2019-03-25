@@ -1,9 +1,9 @@
 const {series, src, dest, watch} = require('gulp');
-const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 function minify(done) {
     return src('src/index.js')
-        .pipe(uglify())
+        .pipe(terser())
         .pipe(rename('laravelMixGlob.min.js'))
         .pipe(dest('dist/')).on('end', function () {
             done();

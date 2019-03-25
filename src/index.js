@@ -1,10 +1,10 @@
-var mix = require('laravel-mix');
-var glob = require('glob');
-var path = require('path');
-var chokidar = require('chokidar');
+const mix = require('laravel-mix');
+const glob = require('glob');
+const path = require('path');
+const chokidar = require('chokidar');
+require('colors');
 
-
-var MixGlob = (function () {
+const MixGlob = (function () {
     function _mapExt(ext, mapping) {
         if (typeof mapping === 'string') {
             return mapping;
@@ -30,16 +30,26 @@ var MixGlob = (function () {
         // return fa;
     }
 
-    function mixBaseGlob(mixFuncName, glb, output, mixOptions, options, defaultExtMapping, defaultSpecifier) {
-        var files = glob.sync(glb);
+    function mixBaseGlob(mixFuncName, glb, output, mixOptions, options, defaultExtMapping, noWatch) { // this should refer to the MixGlob instance.
+        const files = glob.sync(glb);
+
+        if (!noWatch) {
+            chokidar.watch(glb)
+            .on('add', pth => {
+                console.log('File added ->'.yellow);
+                console.log(pth);
+                mixBaseGlob.call(this, mixFuncName, pth, output, mixOptions, options, defaultExtMapping, false);
+            });
+        }
+
         // var mixInstance = null;
-        var fl; // file var to make the output
-        var out;
-        var ext;
-        var re_speci;
-        var re_ext;
-        var extMapping = defaultExtMapping; // this mean map any extension to css ('otherwise you provide an mapping object)
-        var extmap;
+        let fl; // file var to make the output
+        let out;
+        let ext;
+        let re_speci;
+        let re_ext;
+        let extMapping = defaultExtMapping; // this mean map any extension to css ('otherwise you provide an mapping object)
+        let extmap;
 
         // handling options access
         if (!options) options = {};
@@ -48,7 +58,7 @@ var MixGlob = (function () {
         //handling globale opational values (with default)
 
         if (!options.compileSpecifier.disabled) { // if not disabled, the we set the regex that correspond to it, depending on the specifier
-            var specifier = defaultSpecifier;
+            let specifier = 'compile';
             if (options.compileSpecifier.specifier) {
                 specifier = options.compileSpecifier.specifier;
             }
@@ -65,17 +75,17 @@ var MixGlob = (function () {
             // console.log("src=  " , file);
 
             if (options.base) {
-                fl = file.replace(options.base, '');
+                fl = file.replace(options.base, ''); // remove the base
                 // console.log('file = ', file);
             } else {
-                fl = file;
+                fl = file; 
             }
             // console.log('=> ', fl);
 
             // handling specifier
 
             if (!options.compileSpecifier.disable) {
-                fl = fl.replace(re_speci, '.');
+                fl = fl.replace(re_speci, '.'); // remove the specifier
                 // console.log('=> ', fl);
             }
 
@@ -122,14 +132,14 @@ var MixGlob = (function () {
     }
 
     function _mixDefaultMapExt(mixFunc, passedMapping, defaultMapping) {
-        var ext = mapExt(mixFunc, passedMapping, defaultMapping);
+        const ext = mapExt(mixFunc, passedMapping, defaultMapping);
         // console.error('!!!!!!!!!', ext);
         if (ext) return ext;
         throw 'defaultMapExt: no mapping precised, neither it\'s supported by default';
     }
 
     function defaultMapExt(mixFunc, mapping) {
-        var mixFuncExt = null;
+        let mixFuncExt = null;
         if (mixFuncs[mixFunc]) {
             // console.log('=========mixFuncs[funcName].mapExt==========> ', mixFuncs[mixFunc].mapExt);
             mixFuncExt = mixFuncs[mixFunc].mapExt;
@@ -161,18 +171,18 @@ var MixGlob = (function () {
 
         this.mixInst = mix;
 
-        Object.keys(mix).forEach(function (mixFunc, index) {
+        Object.keys(mix).forEach((mixFunc, index) => {
             if (!(['mix', 'config', 'scripts', 'styles'].includes(mixFunc))) {
                 //[glb1] <<<====
                 this[mixFunc] = function (glb, output, mixOptions, options) {
                     //[glb1] when you write all the default extensions for all of them tatke it out
-                    var defaultExtMapping = defaultMapExt(mixFunc, this.mapping.mapExt);
+                    const defaultExtMapping = defaultMapExt(mixFunc, this.mapping.mapExt);
 
-                    mixBaseGlob.call(this, mixFunc, glb, output, mixOptions, options, defaultExtMapping, 'compile');
+                    mixBaseGlob.call(this, mixFunc, glb, output, mixOptions, options, defaultExtMapping);
                     return this;
                 }.bind(this);
             }
-        }.bind(this));
+        });
         // this.mix
     }
 
