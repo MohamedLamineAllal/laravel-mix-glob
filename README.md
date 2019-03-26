@@ -65,6 +65,14 @@ Notice that you can chain them.
 Also the api expose the laravel-mix instance as shown at the end.
 or just use mix instance.
 
+
+Launch webpack with 
+
+```
+npm run watch
+```
+
+
 ## The mapping and why:
 Here is the default mapping:
 
