@@ -11,18 +11,18 @@ A wrapper above laravel-mix that add support for globs.
 > ::::::::::::::::
 
 
-# Install
+## Install
 ```
 npm i laravel-mix-glob --save-dev
 ```
 
-# Import
+## Import
 ```js
 const mix = require('laravel-mix'); // you need the laravel mix instance
 const MixGlob = require('laravel-mix-glob');
 ```
 
-#How to use
+## How to use
 Initiate an instance:
 ```js
 const mixGlob = MixGlob({mix}); // mix is required
@@ -63,7 +63,7 @@ Notice that you can chain them.
 Also the api expose the laravel-mix instance as shown at the end.
 or just use mix instance.
 
-# The mapping and why:
+## The mapping and why:
 Here is the default mapping:
 
 ```js
@@ -92,19 +92,19 @@ Here is the default mapping:
 }
 ```
 
-### Where and How the mapping is used
+#### Where and How the mapping is used
 The keys are the name of the mix functions. Because with the globs the output is automatically created. Such a mapping is added. (I will add support for dynamic mapping soon (Using a function, you map per file))
 
-### Why
+#### Why
 - Reason one is that you may need to change the default mapping. 
 - Reason two is If i'm not providing a certain mapping. (You still can)
 
-# Methods parameters:
+## Methods parameters:
 Laravel mix above functions have the following signature (input, output, mixOptions).  MixGlob change that to (glob, outputDir, mixOptions, mixGlobOptions).
 
 Notice that mixOptions are the same as with mix. 
 
-## mixGlobOptions
+### mixGlobOptions
 ------------------
 |      Option      |       type      |                 default                 |                                                                                                            Role                                                                                                           |
 |:----------------:|:---------------:|:---------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -112,28 +112,28 @@ Notice that mixOptions are the same as with mix.
 | compileSpecifier |      object     | {disabled: false, specifier: 'compile'} |  The specifier allow us to specify a string that will be removed from the compiled file. The goal is to have a way to differentiate the files that need to be compiled (main bundles).   And to use a specifier for that  |
 |    extMapping    | object | string |                                         |  Provide mapping for a specific of matched files extensions.   ex: scss => css, sass => css.   If a string is provided, then all the files whatever there extension are mapped to it.                                     |
 
-### More details about the options
+#### More details about the options
 
-# Adding fiels and Restarting
+## Adding fiels and Restarting
 MixGlob laverage chokidar for files watch. If you add a file that the glob match. Webpack will be completly restarted. The old process is killed and a new one start. 
 
-# How mix glob work
+## How mix glob work
 
 
-# MixGlob and laravel-mix
+## MixGlob and laravel-mix
 MixGlob is just a convenience that add support for globs. It's ment to be used along laravel-mix. All the functions of laravel-mix are exported to MixGlob. But only the one on the default mapping above are supposed to work. For the rest it's not tested yet. And some work is to be done. it's jsut for beta for now. If you get any errors. Use the laravel-mix instance and the usual flow. Also that apply for the functions that doesn't need globs.
 
-# examples
+## examples
 
-# an explicative video
+## an explicative video
 
-# Issues and features requests
-
-
-# contribution
+## Issues and features requests
 
 
-# Work to do
+## contribution
+
+
+## Work to do
 - Implement tests
 - concise logging to console.
 - ...
