@@ -3,11 +3,13 @@ A wrapper above laravel-mix that add support for globs.
 
 
 > ::::::NOTE::::::
+>
 > laravel-mix-glob is early published, and I'm working on it right now. 
 > Please come back next week !
 > Stay tooned. 
 >
 > Also you can try it as it is (alpha (debug mode)). And report any bugs and anomaly. As i only tested it in linux now. By the end of the week, it will be ready!
+>
 > ::::::::::::::::
 
 
@@ -138,10 +140,14 @@ MixGlob is just a convenience that add support for globs. It's ment to be used a
 - concise logging to console.
 - ...
 
+
+
 > ::::::NOTE::::::
+>
 > laravel-mix-glob is early published, and I'm working on it right now. 
 > Please come back next week !
 > Stay tooned. 
 >
-> Also you can try it as it is. And report any bugs and errors. As i only tested it in linux now. By the end of the week, it will be ready!
+> Also you can try it as it is (alpha (debug mode)). And report any bugs and anomaly. As i only tested it in linux now. By the end of the week, it will be ready!
+>
 > ::::::::::::::::
