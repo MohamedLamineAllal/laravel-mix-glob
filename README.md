@@ -116,7 +116,7 @@ Notice that mixOptions are the same as with mix.
 
 #### More details about the options
 
-## Adding fiels and Restarting
+## Adding fiels and Restart
 MixGlob laverage chokidar for files watch. If you add a file that the glob match. Webpack will be completly restarted. The old process is killed and a new one start. 
 
 ## How mix glob work
