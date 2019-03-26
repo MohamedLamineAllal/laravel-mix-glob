@@ -185,7 +185,7 @@ const MixGlob = (function () {
                 // console.log('done');
             } else {
                 // console.log(mixFuncName);
-                console.log('mixInst =nop='.green);
+                // console.log('mixInst =nop='.green);
                 // console.log(this.mixInst);
                 this.mixInst = this.mixInst[mixFuncName](file, out);
                 // console.log('done');
