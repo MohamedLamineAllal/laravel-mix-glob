@@ -81,30 +81,66 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/test.compile.js":
-/*!**************************************!*\
-  !*** ./resources/js/test.compile.js ***!
-  \**************************************/
+/***/ "./resources/js/fdgdfg.compile.js":
+/*!****************************************!*\
+  !*** ./resources/js/fdgdfg.compile.js ***!
+  \****************************************/
 /*! no exports provided */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/test.compile.js'");
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/fdgdfg.compile.js'");
 
 /***/ }),
 
-/***/ 14:
-/*!********************************************!*\
-  !*** multi ./resources/js/test.compile.js ***!
-  \********************************************/
+/***/ "./resources/sass/home.compile.scss":
+/*!******************************************!*\
+  !*** ./resources/sass/home.compile.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/previewPage/preview.compile.scss":
+/*!*********************************************************!*\
+  !*** ./resources/sass/previewPage/preview.compile.scss ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/summernote.scss":
+/*!****************************************!*\
+  !*** ./resources/sass/summernote.scss ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 0:
+/*!********************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/fdgdfg.compile.js ./resources/sass/home.compile.scss ./resources/sass/previewPage/preview.compile.scss ./resources/sass/summernote.scss ***!
+  \********************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/test.compile.js */"./resources/js/test.compile.js");
+__webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/fdgdfg.compile.js */"./resources/js/fdgdfg.compile.js");
+__webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/sass/home.compile.scss */"./resources/sass/home.compile.scss");
+__webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/sass/previewPage/preview.compile.scss */"./resources/sass/previewPage/preview.compile.scss");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/sass/summernote.scss */"./resources/sass/summernote.scss");
 
 
 /***/ })

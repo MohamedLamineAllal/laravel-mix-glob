@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -93,11 +93,11 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/something.compile.js'");
 
 /***/ }),
 
-/***/ 3:
+/***/ 13:
 /*!*************************************************!*\
   !*** multi ./resources/js/something.compile.js ***!
   \*************************************************/

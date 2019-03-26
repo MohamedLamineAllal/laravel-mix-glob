@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/test.compile.js":
-/*!**************************************!*\
-  !*** ./resources/js/test.compile.js ***!
-  \**************************************/
-/*! no exports provided */
+/***/ "./resources/js/kljsdf.compile.js":
+/*!****************************************!*\
+  !*** ./resources/js/kljsdf.compile.js ***!
+  \****************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/test.compile.js'");
+
 
 /***/ }),
 
-/***/ 14:
-/*!********************************************!*\
-  !*** multi ./resources/js/test.compile.js ***!
-  \********************************************/
+/***/ 1:
+/*!**********************************************!*\
+  !*** multi ./resources/js/kljsdf.compile.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/test.compile.js */"./resources/js/test.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/kljsdf.compile.js */"./resources/js/kljsdf.compile.js");
 
 
 /***/ })

@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/test.compile.js":
+/***/ "./resources/js/new6.compile.js":
 /*!**************************************!*\
-  !*** ./resources/js/test.compile.js ***!
+  !*** ./resources/js/new6.compile.js ***!
   \**************************************/
-/*! no exports provided */
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/test.compile.js'");
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/new6.compile.js'");
 
 /***/ }),
 
-/***/ 14:
+/***/ 5:
 /*!********************************************!*\
-  !*** multi ./resources/js/test.compile.js ***!
+  !*** multi ./resources/js/new6.compile.js ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/test.compile.js */"./resources/js/test.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/new6.compile.js */"./resources/js/new6.compile.js");
 
 
 /***/ })

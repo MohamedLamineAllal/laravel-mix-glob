@@ -55,9 +55,6 @@ const MixGlob = (function () {
 
     function mixBaseGlob(mixFuncName, glb, output, mixOptions, options, defaultExtMapping, noWatch) { // this should refer to the MixGlob instance.
         console.log('mixBaseGlob ==='.bgBlue);
-
-
-
         const files = globMulti(glb);
         console.log('gb files ===='.green);
         console.log(files);
@@ -98,7 +95,17 @@ const MixGlob = (function () {
                             console.log('File added'.bgCyan);
                             console.log(pth.yellow);
                             console.log('restart...'.cyan);
-                            const subprocess = spawn("npm", ['run', 'watch'], {shell: true, stdio: 'inherit', cwd: process.cwd()});
+                            const subprocess = spawn("npm", ['run', 'watch'], {detached: true, stdio: 'inherit', cwd: process.cwd()});
+
+                            // console.log('stout on data'.cyan);
+                            // subprocess.stdout.on('data', (data) => {
+                            //     setTimeout(() => {
+                            //         console.log('data ======='.yellow);
+                            //         console.log(data);
+                            //     }, 1000);
+                            // });
+
+                            // here add the process pid to a log (to remove it later)
 
                             subprocess.unref();
 
@@ -252,6 +259,27 @@ const MixGlob = (function () {
 
     function MixGlob(options) {
         console.log('Mix glob'.yellow);
+        console.log('process!!'.bgBlue);
+        console.log(process);
+        if (process && process.stdout) {
+            console.log('stdout ======'.red);
+            process.stdout.on('data', (data) => {
+                data = data.toString();
+                console.log("To quit type 'c' twice");
+                console.log(data);
+                if(data.toString() === 'c' || data === 'C') {
+                    console.log('closed! CONTROL+C now'.cyan);
+                    process.exit(0);
+                }
+            });
+        }
+        process.on('SIGINT', () => {
+            setTimeout(() => {
+                console.log('SIGINT'.bgRed);
+                process.exit(0);
+            }, 2000);
+        });
+
         if (!options.mix) {
             throw new Error('mix instance missing!')
         }
