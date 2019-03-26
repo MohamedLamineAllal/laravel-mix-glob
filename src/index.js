@@ -1,10 +1,14 @@
-const mix = require('laravel-mix');
+require('colors');
+// const mix = require('laravel-mix')
 const glob = require('glob');
 const path = require('path');
 const chokidar = require('chokidar');
-require('colors');
+const mm = require('micromatch');
+const { exec, spawn } = require('child_process');
 
 const MixGlob = (function () {
+    console.log('in MixGlob'.yellow);
+
     function _mapExt(ext, mapping) {
         if (typeof mapping === 'string') {
             return mapping;
@@ -30,16 +34,83 @@ const MixGlob = (function () {
         // return fa;
     }
 
+    function globMulti (glbs) {
+        if (!Array.isArray(glbs)) {
+            glbs = [glbs];
+        }
+
+        const files = [];
+
+        glbs.forEach(glb => {
+            console.log('glb glob mutli ='.yellow);
+            console.log(glb);
+            files.push(...glob.sync(glb));
+        });
+
+        console.log('files glob mutli'.cyan);
+        console.log(files);
+
+        return files;
+    }
+
     function mixBaseGlob(mixFuncName, glb, output, mixOptions, options, defaultExtMapping, noWatch) { // this should refer to the MixGlob instance.
-        const files = glob.sync(glb);
+        console.log('mixBaseGlob ==='.bgBlue);
+
+
+
+        const files = globMulti(glb);
+        console.log('gb files ===='.green);
+        console.log(files);
+
+        this.watchedFiles = [
+            ...this.watchedFiles,
+            ...files.filter(file => !this.watchedFiles.includes(file))
+        ];
+        console.log('watched files'.cyan);
+        console.log(this.watchedFiles);
+
+        if (!Array.isArray(glb)) {
+            glb = [glb];
+        }
+
+        this.watchedGlobs = [
+            ...this.watchedGlobs,
+            ...glb
+        ];
+
 
         if (!noWatch) {
-            chokidar.watch(glb)
-            .on('add', pth => {
-                console.log('File added ->'.yellow);
-                console.log(pth);
-                mixBaseGlob.call(this, mixFuncName, pth, output, mixOptions, options, defaultExtMapping, false);
-            });
+            if (this.watcher) {
+                console.log('watching ==+>'.blue);
+                console.log(glb.yellow);
+                this.watcher.add(glb);
+            } else {
+                console.log('watching ==first+>'.blue);
+                console.log(glb.yellow);
+
+                this.watcher =
+                    chokidar.watch(glb)
+                    .on('add', pth => {
+                        // console.log('File added ->'.yellow);
+                        // console.log(pth);
+                        if (mm.every(pth, this.watchedGlobs) && !this.watchedFiles.includes(pth)) {
+                            // mixBaseGlob.call(this, mixFuncName, pth, output, mixOptions, options, defaultExtMapping, false);
+                            console.log('File added'.bgCyan);
+                            console.log(pth.yellow);
+                            console.log('restart...'.cyan);
+                            const subprocess = spawn("npm", ['run', 'watch'], {shell: true, stdio: 'inherit', cwd: process.cwd()});
+
+                            subprocess.unref();
+
+                            setTimeout(() => {
+                                process.exit(0);
+                            }, 1000);
+                        }
+                    })
+                    // .on('unlink', pth => {
+
+                    // });
+            }
         }
 
         // var mixInstance = null;
@@ -70,7 +141,7 @@ const MixGlob = (function () {
             extMapping = options.extMapping;
         }
         // [to do] add verbose option (to show elegantly what files where treated)
-        files.forEach(function (file) {
+        files.forEach((file) => {
             // console.log('>');
             // console.log("src=  " , file);
 
@@ -78,7 +149,7 @@ const MixGlob = (function () {
                 fl = file.replace(options.base, ''); // remove the base
                 // console.log('file = ', file);
             } else {
-                fl = file; 
+                fl = file;
             }
             // console.log('=> ', fl);
 
@@ -89,6 +160,7 @@ const MixGlob = (function () {
                 // console.log('=> ', fl);
             }
 
+            // console.log('--------->');
 
             //handling extension mapping (and replace)
             ext = path.extname(fl).substr(1);
@@ -99,6 +171,7 @@ const MixGlob = (function () {
             if (ext !== extmap) {
                 fl = fl.replace(re_ext, extmap);
             }
+            // console.log('--->');
 
             // console.log('==> fl = ', fl);
             out = path.join(output, fl);
@@ -106,11 +179,16 @@ const MixGlob = (function () {
             //    console.dir(this.mix);
             if (mixOptions) {
                 // console.log(mixFuncName);
+                // console.log('mixInst =='.green);
+                // console.log(this.mixInst);
                 this.mixInst = this.mixInst[mixFuncName](file, out, mixOptions);
+                // console.log('done');
             } else {
                 // console.log(mixFuncName);
-
+                console.log('mixInst =nop='.green);
+                // console.log(this.mixInst);
                 this.mixInst = this.mixInst[mixFuncName](file, out);
+                // console.log('done');
             }
 
             // console.log('fl = ', fl);
@@ -128,6 +206,21 @@ const MixGlob = (function () {
         },
         js: {
             mapExt: 'js'
+        },
+        less: {
+            mapExt: 'css'
+        },
+        stylus: {
+            mapExt: 'css'
+        },
+        react: {
+            mapExt: 'js'
+        },
+        ts: {
+            mapExt: 'js'
+        },
+        preact: {
+            mapExt:'js'
         }
     }
 
@@ -158,31 +251,43 @@ const MixGlob = (function () {
     // }
 
     function MixGlob(options) {
+        console.log('Mix glob'.yellow);
+        if (!options.mix) {
+            throw new Error('mix instance missing!')
+        }
 
         if (options) {
             if (options.mapping) {
-                this.mappping = options.mapping
-            } 
-        } 
-
-        if (!options || !options.mapping) {
-            this.mappping = {};
+                this.mapping = options.mapping
+            }
         }
 
-        this.mixInst = mix;
+        if (!options || !options.mapping) {
+            this.mapping = {};
+        }
 
-        Object.keys(mix).forEach((mixFunc, index) => {
+        this.mixInst = options.mix;
+        this.watchedFiles = [];
+        this.watchedGlobs = [];
+
+        Object.keys(this.mixInst).forEach((mixFunc, index) => {
             if (!(['mix', 'config', 'scripts', 'styles'].includes(mixFunc))) {
                 //[glb1] <<<====
+                // console.log((index + ' - ' + mixFunc).yellow);
                 this[mixFunc] = function (glb, output, mixOptions, options) {
                     //[glb1] when you write all the default extensions for all of them tatke it out
                     const defaultExtMapping = defaultMapExt(mixFunc, this.mapping.mapExt);
-
+                    // console.log('before mix base glob'.green);
+                    // console.log(this);
                     mixBaseGlob.call(this, mixFunc, glb, output, mixOptions, options, defaultExtMapping);
                     return this;
                 }.bind(this);
             }
         });
+
+        // console.log('this ===='.bgBlue);
+        // console.log(this);
+
         // this.mix
     }
 
@@ -195,8 +300,8 @@ const MixGlob = (function () {
         //expose originale mix functions (can be chained with mixGlob)
         p.mix = function (mixFuncName) { // usage : .mix('scripts')('', '').js().mix('minify')(...).
             return function () {
-                console.log(arguments);
-                mix[mixFuncName].apply(mix, arguments);
+                // console.log(arguments);
+                this.mixInst[mixFuncName].apply(this.mixInst, arguments);
                 return this;
             }.bind(this);
         }

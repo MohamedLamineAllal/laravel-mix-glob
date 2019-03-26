@@ -1,0 +1,9 @@
+{
+    "/js/home.js": "/js/home.js",
+    "/css/home.css": "/css/home.css",
+    "/css/previewPage/preview.css": "/css/previewPage/preview.css",
+    "/../resources/views/system/admin/dashboard/partials/_summernote_css.blade.php": "/../resources/views/system/admin/dashboard/partials/_summernote_css.blade.php",
+    "/js/new.js": "/js/new.js",
+    "/js/previewPage/preview.js": "/js/previewPage/preview.js",
+    "/js/something.js": "/js/something.js"
+}

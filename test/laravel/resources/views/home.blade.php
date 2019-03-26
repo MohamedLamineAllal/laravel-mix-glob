@@ -8,7 +8,9 @@ Home
 <script>
     var previewRoute = '{{route('preview')}}';
 </script>
-<button id="goToPreviewBtn" class="btn btn-primary rounded"></button>
+<button id="goToPreviewBtn" class="btn btn-primary rounded">
+    Go to preview
+</button>
 
 
 <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">

@@ -1,6 +1,11 @@
-const mixGlob = require('./../../dist/laravelMixGlob.min.js');
+require('colors')
+const mix = require('laravel-mix');
+console.log('webpcak mix start'.bgCyan);
+const MixGlob = require('./../../dist/laravelMixGlob.min.js');
 
-mixGlob = new MixGlob();
+console.log("webpack mix ".yellow);
+
+mixGlob = new MixGlob({mix});
 
 mixGlob.sass('resources/sass/**/*.compile.scss', 'public/css', null, {
     base: 'resources/sass/',

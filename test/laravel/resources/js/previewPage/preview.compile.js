@@ -1,9 +1,23 @@
 import axios from 'axios';
-import {InnerloAlert} from 'innerlo';
-import LoadingBar from 'loadingBar'
-
+import {InnerloAlert} from '../innerlo';
+import LoadingSprite from '../../../node_modules/loading-sprite/dist/js/esm/loadingSprite.js'
 
 $(function () {
+    let loader = new LoadingSprite({ // <---------------------!!!!!!
+        // loaderDOM: ,
+        loaderClass: 'sk-cube-grid',
+        // zIndex: 1000000000,
+        blackBack: true,
+        // backBackground: 'rgba(0,0,0,0.2)',
+        // holderStyle: {
+        //     // any style here
+        // },
+        // container: someComponent,    // loaderWidth: '100px',
+        // loaderHeight: '100px',
+        // loaderWidth: '100px',
+        // loaderHeight: '100px',
+    });
+
     let writeNoteSummernote = $(document.getElementById('writeNoteSummernote'));
     
     writeNoteSummernote.summernote({
@@ -25,12 +39,13 @@ $(function () {
         window.location.href = reactHelloRoute;
     });
 
-    sendNoe.addEventListener('click' , function () {
+    sendNote.addEventListener('click' , function () {
+        loader.show();
         axios.post(previewSendNoteRoute, {
 
         })
         .then(function (resp) {
-
+            loader.hide();
         })
         .catch(function (err) {
 
