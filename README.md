@@ -103,7 +103,9 @@ Here is the default mapping:
 ```
 
 #### Where and How the mapping is used
-The keys are the name of the mix functions. Because with the globs the output is automatically created. Such a mapping is added. (I will add support for dynamic mapping soon (Using a function, you map per file))
+The keys are the name of the mix functions. Because with the globs the output is automatically created. Such a mapping is needed to do so. As a method like `sass` can have files of different extensions, and so too does js (jsm, jsx). Whatever it is, the mapping allow to precise the extension of the output for a method (sass, js, react, ts ...). Then in the methods params, we can precise a mapping by input files extension.
+
+(I may add support for dynamic mapping soon (Using a function, you map per file))
 
 #### Why
 - Reason one is that you may need to change the default mapping. 
