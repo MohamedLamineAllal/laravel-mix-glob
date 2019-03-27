@@ -4,8 +4,8 @@ A wrapper above laravel-mix that add support for globs.
 
 > ::::::NOTE::::::
 >
-> laravel-mix-glob is early published, and I'm working on it right now. 
-> Please come back next week !
+> laravel-mix-glob is early published, it is however already practical, as I stay working on it right now. 
+> You can come back check next week !
 > Stay tooned. 
 >
 > Also you can try it as it is (alpha (debug mode)). And report any bugs and anomaly. As i only tested it in linux now. By the end of the week, it will be ready!
@@ -122,12 +122,24 @@ Notice that mixOptions are the same as with mix.
 |:----------------:|:---------------:|:---------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |       base       |      string     |                                         |  Precise the base directory, so the transforamtion are correctly done,   and the output well generated                                                                                                                    |
 | compileSpecifier |      object     | {disabled: false, specifier: 'compile'} |  The specifier allow us to specify a string that will be removed from the compiled file. The goal is to have a way to differentiate the files that need to be compiled (main bundles).   And to use a specifier for that  |
-|    extMapping    | object | string |                                         |  Provide mapping for a specific of matched files extensions.   ex: scss => css, sass => css.   If a string is provided, then all the files whatever there extension are mapped to it.                                     |
+|    extMapping    | object | string |                                         |  Provide mapping for a specific extensions of matched files.   ex: scss => css, sass => css.   If a string is provided, then all the files whatever there extension are mapped to it.                                     |
 
 #### More details about the options
+The `base` option is very important to specify the base folder. Generally `resources/js`, `resoures/sass` ...etc  
 
-## Adding fiels and Restart
-MixGlob laverage chokidar for files watch. If you add a file that the glob match. Webpack will be completly restarted. The old process is killed and a new one start. 
+The `compileSpecifier` option is another important one, that you need to know. You need to know that the specifier by default is enabled. Defaulting to `'compile'`. It's role is to remove this specifier in the output. And the goal is that we can have such a specifier, that allow us to distinguish the files that need to be compiled (the entry point). Then we need to match them in the glob. As shown in the example above.
+The object is defined as bellow
+```js
+{
+    disabled: true, // to precise if it should be defined or not. (default: false)
+    specifier: 'cmpl' // precise your specifier
+}
+```
+
+The `extMapping` ..
+
+## Adding files and Restart
+MixGlob laverage chokidar for files watch. If you add a file that the glob match (while it's running). Webpack will be completly restarted for you. The old process is killed and a new one start.
 
 ## How mix glob work
 
@@ -154,8 +166,8 @@ MixGlob is just a convenience that add support for globs. It's ment to be used a
 
 > ::::::NOTE::::::
 >
-> laravel-mix-glob is early published, and I'm working on it right now. 
-> Please come back next week !
+> laravel-mix-glob is early published, it is however already practical, as I stay working on it right now. 
+> You can come back check next week !
 > Stay tooned. 
 >
 > Also you can try it as it is (alpha (debug mode)). And report any bugs and anomaly. As i only tested it in linux now. By the end of the week, it will be ready!

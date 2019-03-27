@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1666,50 +1666,14 @@ function clearDomNodeInner(DOM_Node) {
 
 /***/ }),
 
-/***/ "./resources/sass/home.compile.scss":
-/*!******************************************!*\
-  !*** ./resources/sass/home.compile.scss ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/previewPage/preview.compile.scss":
-/*!*********************************************************!*\
-  !*** ./resources/sass/previewPage/preview.compile.scss ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/summernote.scss":
-/*!****************************************!*\
-  !*** ./resources/sass/summernote.scss ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!******************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/home.compile.js ./resources/sass/home.compile.scss ./resources/sass/previewPage/preview.compile.scss ./resources/sass/summernote.scss ***!
-  \******************************************************************************************************************************************************************/
+/***/ 1:
+/*!********************************************!*\
+  !*** multi ./resources/js/home.compile.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/home.compile.js */"./resources/js/home.compile.js");
-__webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/sass/home.compile.scss */"./resources/sass/home.compile.scss");
-__webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/sass/previewPage/preview.compile.scss */"./resources/sass/previewPage/preview.compile.scss");
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/sass/summernote.scss */"./resources/sass/summernote.scss");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/home.compile.js */"./resources/js/home.compile.js");
 
 
 /***/ })

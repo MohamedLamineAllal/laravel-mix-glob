@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/kljsdf.compile.js":
-/*!****************************************!*\
-  !*** ./resources/js/kljsdf.compile.js ***!
-  \****************************************/
+/***/ "./resources/js/mm.compile.js":
+/*!************************************!*\
+  !*** ./resources/js/mm.compile.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -97,14 +97,14 @@
 
 /***/ }),
 
-/***/ 2:
-/*!**********************************************!*\
-  !*** multi ./resources/js/kljsdf.compile.js ***!
-  \**********************************************/
+/***/ 3:
+/*!******************************************!*\
+  !*** multi ./resources/js/mm.compile.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/kljsdf.compile.js */"./resources/js/kljsdf.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/mm.compile.js */"./resources/js/mm.compile.js");
 
 
 /***/ })

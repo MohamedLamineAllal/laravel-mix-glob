@@ -5,6 +5,7 @@ const path = require('path');
 const chokidar = require('chokidar');
 const mm = require('micromatch');
 const { exec, spawn } = require('child_process');
+const fs = require('fs');
 
 const MixGlob = (function () {
     console.log('in MixGlob'.yellow);
@@ -53,8 +54,44 @@ const MixGlob = (function () {
         return files;
     }
 
+
+    function processPersist_addPID(pid) {
+        try {
+            if (fs.existsSync('pid.log')) {
+                const pidList =fs.readFileSync('pid.log');
+                pidList.push(pid);
+                fs.writeFileSync('pid.log', JSON.stringify(pidList));
+            } else {
+                fs.writeFileSync('pid.log', JSON.stringify([pid]));
+            }
+        } catch (err) {
+            console.log(err.red);
+        }
+    }
+
+    function processPersist_getPIDS() {
+        try {
+            if (fs.existsSync('pid.log')) {
+                return JSON.parse(fs.readFileSync('pid.log'));
+            } 
+            return [];
+        } catch(err) {
+            console.log(err);
+            return []
+        }
+    }
+
+    function processPersist_clean() {
+        if (fs.existsSync('pid.log')) {
+            fs.unlinkSync('pid.log');
+        }
+    }
+
+
     function mixBaseGlob(mixFuncName, glb, output, mixOptions, options, defaultExtMapping, noWatch) { // this should refer to the MixGlob instance.
         console.log('mixBaseGlob ==='.bgBlue);
+        console.log('Glob: '.yellow);
+        console.log(glb);
         const files = globMulti(glb);
         console.log('gb files ===='.green);
         console.log(files);
@@ -63,7 +100,7 @@ const MixGlob = (function () {
             ...this.watchedFiles,
             ...files.filter(file => !this.watchedFiles.includes(file))
         ];
-        console.log('watched files'.cyan);
+        console.log('Total watched files'.cyan);
         console.log(this.watchedFiles);
 
         if (!Array.isArray(glb)) {
@@ -96,6 +133,8 @@ const MixGlob = (function () {
                             console.log(pth.yellow);
                             console.log('restart...'.cyan);
                             const subprocess = spawn("npm", ['run', 'watch'], {detached: true, stdio: 'inherit', cwd: process.cwd()});
+
+                            processPersist_addPID(subprocess.pid);
 
                             // console.log('stout on data'.cyan);
                             // subprocess.stdout.on('data', (data) => {
@@ -259,16 +298,31 @@ const MixGlob = (function () {
 
     function MixGlob(options) {
         console.log('Mix glob'.yellow);
-        console.log('process!!'.bgBlue);
-        console.log(process);
+        // console.log('process!!'.bgBlue);
+        // console.log(process);
         if (process && process.stdout) {
-            console.log('stdout ======'.red);
+            // console.log('stdout ======'.red);
             process.stdout.on('data', (data) => {
                 data = data.toString();
-                console.log("To quit type 'c' twice");
-                console.log(data);
+                console.log("To quit type 'c' multiple times");
+                // console.log(data);
                 if(data.toString() === 'c' || data === 'C') {
-                    console.log('closed! CONTROL+C now'.cyan);
+                    const pids = processPersist_getPIDS();
+                    console.log('closing ...'.green);
+                    console.log('pids '.cyan + JSON.stringify(pids).yellow);
+
+                    pids.forEach(pid => {
+                        try {
+                            process.kill(pid, 'SIGINT');
+                        } catch(err) {
+                            console.log('Error killing pid '.red + pid);
+                        }
+                    });
+                    
+                    processPersist_clean();
+
+                    console.log('closed! CONTROL+C now'.blue);
+
                     process.exit(0);
                 }
             });

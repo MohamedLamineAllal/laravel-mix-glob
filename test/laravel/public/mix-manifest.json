@@ -1,9 +1,13 @@
 {
-    "/js/home.js": "/js/home.js",
+    "/js/hi.js": "/js/hi.js",
     "/css/home.css": "/css/home.css",
     "/css/previewPage/preview.css": "/css/previewPage/preview.css",
     "/../resources/views/system/admin/dashboard/partials/_summernote_css.blade.php": "/../resources/views/system/admin/dashboard/partials/_summernote_css.blade.php",
+    "/js/home.js": "/js/home.js",
     "/js/kljsdf.js": "/js/kljsdf.js",
+    "/js/mm.js": "/js/mm.js",
+    "/js/newsome.js": "/js/newsome.js",
     "/js/previewPage/preview.js": "/js/previewPage/preview.js",
-    "/js/sdqffd.js": "/js/sdqffd.js"
+    "/js/sdqffd.js": "/js/sdqffd.js",
+    "/js/somenew.js": "/js/somenew.js"
 }
