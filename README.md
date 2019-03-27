@@ -164,10 +164,13 @@ MixGlob is just a convenience that add support for globs. It's ment to be used a
 ## an explicative video
 
 ## Issues and features requests
-
+Don't hesitate to fill an issue for any bug, or feature request. 
+(As now it's an alpha version, though tested and work well in linux. Helping fix any potential bugs is very requested.)
 
 ## contribution
-
+- There is not test implemented yet. Neither guidelines. Feel free to fill any PR.
+- Show your support by staring the project.
+- Feel free to contact me at allaldevelopment@gmail.com
 
 ## Work to do
 - Implement tests
