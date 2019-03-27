@@ -118,11 +118,11 @@ Notice that mixOptions are the same as with mix.
 
 ### mixGlobOptions
 ------------------
-|      Option      |       type      |                 default                 |                                                                                                            Role                                                                                                           |
-|:----------------:|:---------------:|:---------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|       base       |      string     |                                         |  Precise the base directory, so the transforamtion are correctly done,   and the output well generated                                                                                                                    |
-| compileSpecifier |      object     | {disabled: false, specifier: 'compile'} |  The specifier allow us to specify a string that will be removed from the compiled file. The goal is to have a way to differentiate the files that need to be compiled (main bundles).   And to use a specifier for that  |
-|    extMapping    | object | string |                                         |  Provide mapping for a specific extensions of matched files.   ex: scss => css, sass => css.   If a string is provided, then all the files whatever there extension are mapped to it.                                |
+|      Option      |  type  |                 default                 |                                                                                                           Role                                                                                                          |
+|:----------------:|:------:|:---------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|       base       | string |                                         |                                                          Precise the base directory, so the transforamtion are correctly done,   and the output well generated                                                          |
+| compileSpecifier | object | {disabled: false, specifier: 'compile'} | The specifier allow us to specify a string that will be removed from the compiled file. The goal is to have a way to differentiate the files that need to be compiled (main bundles).   And to use a specifier for that |
+|    extMapping    | object |                  string                 |                 Provide mapping for a specific extensions of matched files.     ex: scss => css, sass => css.     If a string is provided, then all the files whatever there extension are mapped to it.                |
 
 #### More details about the options
 The `base` option is very important to specify the base folder. Generally `resources/js`, `resoures/sass` ...etc It's goal is to be able to extract what to put on the output dir.
