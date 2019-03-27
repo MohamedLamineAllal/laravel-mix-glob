@@ -154,6 +154,8 @@ MixGlob laverage chokidar for files watch. If you add a file that the glob match
 
 ## How mix glob work
 
+## Watching and process quiting
+You need to know that after you add a file and webpack get restarted. Quiting the process will require a little manoeuvre. Either by you closing the console. Or you can click ENTER (May be several times), you will then get a message to tell you to type the character `c` several times. This will quit the process correctly (as there is more then one involve).
 
 ## MixGlob and laravel-mix
 
