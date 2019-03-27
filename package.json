@@ -23,6 +23,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohamedLamineAllal/laravel-mix-glob.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MohamedLamineAllal/laravel-mix-glob/issues"
+  },
+  "homepage": "https://github.com/MohamedLamineAllal/laravel-mix-glob",
   "keywords": [
     "laravel-mix",
     "glob",
@@ -30,6 +38,6 @@
     "support",
     "assets"
   ],
-  "author": "Mohamed Lamine Allal",
+  "author": "Mohamed Lamine Allal <allaldevelopment@gmail.com>",
   "license": "MIT"
 }

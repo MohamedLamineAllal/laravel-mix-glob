@@ -135,6 +135,14 @@ The object is defined as bellow
     specifier: 'cmpl' // precise your specifier
 }
 ```
+And so we can have files like this (in resources)
+![resources](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_resources.png)
+
+And the output will be
+![output](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_output.png)
+![output](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_output_compilation.png)
+
+
 
 The `extMapping` ..
 
