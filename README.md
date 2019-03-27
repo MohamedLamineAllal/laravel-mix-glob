@@ -112,7 +112,7 @@ The keys are the name of the mix functions. Because with the globs the output is
 - Reason two is If i'm not providing a certain mapping. (You still can)
 
 ## Methods parameters:
-Laravel mix above functions have the following signature (input, output, mixOptions).  MixGlob change that to (glob, outputDir, mixOptions, mixGlobOptions).
+Laravel mix above functions have the following signature `(input, output, mixOptions)`.  MixGlob change that to `(glob, outputDir, mixOptions, mixGlobOptions)`.
 
 Notice that mixOptions are the same as with mix. 
 
@@ -122,10 +122,10 @@ Notice that mixOptions are the same as with mix.
 |:----------------:|:---------------:|:---------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |       base       |      string     |                                         |  Precise the base directory, so the transforamtion are correctly done,   and the output well generated                                                                                                                    |
 | compileSpecifier |      object     | {disabled: false, specifier: 'compile'} |  The specifier allow us to specify a string that will be removed from the compiled file. The goal is to have a way to differentiate the files that need to be compiled (main bundles).   And to use a specifier for that  |
-|    extMapping    | object | string |                                         |  Provide mapping for a specific extensions of matched files.   ex: scss => css, sass => css.   If a string is provided, then all the files whatever there extension are mapped to it.                                     |
+|    extMapping    | object | string |                                         |  Provide mapping for a specific extensions of matched files.   ex: scss => css, sass => css.   If a string is provided, then all the files whatever there extension are mapped to it.                                |
 
 #### More details about the options
-The `base` option is very important to specify the base folder. Generally `resources/js`, `resoures/sass` ...etc  
+The `base` option is very important to specify the base folder. Generally `resources/js`, `resoures/sass` ...etc It's goal is to be able to extract what to put on the output dir.
 
 The `compileSpecifier` option is another important one, that you need to know. You need to know that the specifier by default is enabled. Defaulting to `'compile'`. It's role is to remove this specifier in the output. And the goal is that we can have such a specifier, that allow us to distinguish the files that need to be compiled (the entry point). Then we need to match them in the glob. As shown in the example above.
 The object is defined as bellow
@@ -136,12 +136,15 @@ The object is defined as bellow
 }
 ```
 And so we can have files like this (in resources)
+
 ![resources](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_resources.png)
 
-And the output will be
-![output](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_output.png)
-![output](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_output_compilation.png)
 
+And the output will be
+
+![output](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_output.png)
+
+![output](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_output_compilation.png)
 
 
 The `extMapping` ..
@@ -153,6 +156,7 @@ MixGlob laverage chokidar for files watch. If you add a file that the glob match
 
 
 ## MixGlob and laravel-mix
+
 MixGlob is just a convenience that add support for globs. It's ment to be used along laravel-mix. All the functions of laravel-mix are exported to MixGlob. But only the one on the default mapping above are supposed to work. For the rest it's not tested yet. And some work is to be done. it's jsut for beta for now. If you get any errors. Use the laravel-mix instance and the usual flow. Also that apply for the functions that doesn't need globs.
 
 ## examples
