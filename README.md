@@ -153,6 +153,7 @@ The `extMapping` ..
 MixGlob laverage chokidar for files watch. If you add a file that the glob match (while it's running). Webpack will be completly restarted for you. The old process is killed and a new one start.
 
 ## How mix glob work
+laravel-mix-glob first inherit all the functions form laravel mix. It laverage globs to match files. Then it will loop through the matched files. And execute the laravel-mix functions file by file. So it wrap upon laravel-mix. Automate using the globs all the file by file functions call, that you should do otherwise. In plus to that. It have files watchers. That watch using the same globs. If a file that match a glob is added. Webpack will automaticly be restarted so it take the new file in. This apply for every used function. And too there is the mapping, the base directory option and the specifier which all were explained.  
 
 ## Watching and process quiting
 You need to know that after you add a file and webpack get restarted. Quiting the process will require a little manoeuvre. Either by you closing the console. Or you can click ENTER (May be several times), you will then get a message to tell you to type the character `c` several times. This will quit the process correctly (as there is more then one involve).
