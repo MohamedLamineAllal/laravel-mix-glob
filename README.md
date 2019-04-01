@@ -4,11 +4,9 @@ A wrapper above laravel-mix that add support for globs.
 
 > ::::::NOTE::::::
 >
-> laravel-mix-glob is early published, it is however already practical, as I stay working on it right now. 
-> You can come back check next week !
-> Stay tooned. 
+> laravel-mix-glob is newly published, it is however already practical. It's in beta now.  (Filling issuing about any bug or problem. Or even just to Know better. All welcomed. And appreicated.)
 >
-> Also you can try it as it is (alpha (debug mode)). And report any bugs and anomaly. As i only tested it in linux now. By the end of the week, it will be ready!
+> Know that i only tested it in linux. I will test it too in windows. (In mean time i'm ready to work on any issues and problems)
 >
 > ::::::::::::::::
 
@@ -171,9 +169,10 @@ Don't hesitate to fill an issue for any bug, or feature request.
 (As now it's an alpha version, though tested and work well in linux. Helping fix any potential bugs is very requested.)
 
 ## contribution
-- There is not test implemented yet. Neither guidelines. Feel free to fill any PR.
+- There is no test implemented yet. Neither guidelines. Feel free to fill any PR.
 - Show your support by staring the project.
 - Feel free to contact me at allaldevelopment@gmail.com
+- Help test it better.
 
 ## Work to do
 - Implement tests
@@ -184,10 +183,8 @@ Don't hesitate to fill an issue for any bug, or feature request.
 
 > ::::::NOTE::::::
 >
-> laravel-mix-glob is early published, it is however already practical, as I stay working on it right now. 
-> You can come back check next week !
-> Stay tooned. 
+> laravel-mix-glob is newly published, it is however already practical. It's in beta now.  (Filling issuing about any bug or problem. Or even just to Know better. All welcomed. And appreicated.)
 >
-> Also you can try it as it is (alpha (debug mode)). And report any bugs and anomaly. As i only tested it in linux now. By the end of the week, it will be ready!
+> Know that i only tested it in linux. I will test it too in windows. (In mean time i'm ready to work on any issues and problems)
 >
 > ::::::::::::::::
