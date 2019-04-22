@@ -4,7 +4,8 @@ const glob = require('glob');
 const path = require('path');
 const chokidar = require('chokidar');
 const mm = require('micromatch');
-const { exec, spawn } = require('child_process');
+const { exec } = require('child_process');
+const spawn = require('cross-spawn');
 const fs = require('fs');
 
 const MixGlob = (function () {
