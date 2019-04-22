@@ -134,6 +134,7 @@ const MixGlob = (function () {
                             console.log(pth.yellow);
                             console.log('restart...'.cyan);
                             const subprocess = spawn("npm", ['run', 'watch'], {detached: true, stdio: 'inherit', cwd: process.cwd()});
+                            subprocess.on('error', err => console.error(err));
 
                             processPersist_addPID(subprocess.pid);
 
