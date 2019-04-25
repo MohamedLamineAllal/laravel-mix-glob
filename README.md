@@ -106,7 +106,7 @@ All work.
 With `watch`, `watch-pol` and `hot` auto restart is laveraged at file add rename or remove.  
 
 ## Globs
-laravel-mix-glob use [globby](https://github.com/sindresorhus/globby) internally. For full support for auto restart. You can provide the glob as a string or an array. (You can use an object {pattern: <string> | <array> , options: <globbyOptions>} or a function that return files (signature: (globby) => <filesList>) (can be any function, and it take globby as a parameter, can be used). However with those two format you can't count on the auto restart. As chokidar will not be able to match. And it is not that much of an interesting thing. Cause there is a way to support them fully. (Also the two last format are not well tested with `watch` and `hot`))
+laravel-mix-glob use [globby](https://github.com/sindresorhus/globby) internally. For full support for auto restart. You can provide the glob as a string or an array. (You can use an object {pattern: \<string\> | \<array\> , options: \<globbyOptions\>} or a function that return files (signature: (globby) => \<filesList\>) (can be any function, and it take globby as a parameter, can be used). However with those two format you can't count on the auto restart. As chokidar will not be able to match. And it is not that much of an interesting thing. Cause there is a way to support them fully. (Also the two last format are not well tested with `watch` and `hot`))
 
 
 ### Globbing patterns
@@ -124,7 +124,8 @@ Just a quick overview.
 
 ## Mapping
 
-## The mapping and why:
+### The mapping and why:
+
 laravel-mix-glob internally need to map the extensions to provide the specifier feature.
 Having a flexibility on the mapping can be interesting. Sadely laravel-mix doesn't support outputing to other format then default. (most of the extension mapping api is quiet useless for now).
 Other type of mapping are expected to be added. As mapping files and the base. (more of a luxary thing, then a requirement).
@@ -168,14 +169,14 @@ Notice that mixOptions are the same as with mix.
 ------------------
 |      Option      |  type  |                 default                 |                                                                                                           Role                                                                                                          |
 |:----------------:|:------:|:---------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|       base       | <string>|<object (per Ext)>|<function ((file, ext, mm) => <string (base)>)> |                                         |                                                          Precise the base directory, so the transforamtion are correctly done,   and the output well generated                                                          |
+|       base       | \<string\>|\<object (per Ext)\>|\<function ((file, ext, mm) => \<string (base)\>)\> |                                         |                                                          Precise the base directory, so the transforamtion are correctly done,   and the output well generated                                                          |
 | compileSpecifier | object | {disabled: false, specifier: 'compile'} | The specifier allow us to specify a string that will be removed from the compiled file. The goal is to have a way to differentiate the files that need to be compiled (main bundles).   And to use a specifier for that |
-|    mapping    | object ({ext: <object>|<string>}) |                                   |                 Provide mapping for a specific extensions of matched files.     ex: scss => css, sass => css.     If a string is provided, then all the files whatever there extension are mapped to it.                |
+|    mapping    | object ({ext: \<object\>|\<string\>}) |                                   |                 Provide mapping for a specific extensions of matched files.     ex: scss => css, sass => css.     If a string is provided, then all the files whatever there extension are mapped to it.                |
 
 #### More details about the options
 The `base` option is very important to specify the base folder. Generally `resources/js`, `resoures/sass` ...etc It's goal is to be able to extract what to put on the output dir. 
 - It can be a string. 
-- Or an Object of the format ({<fileExtension>: <string (base)>, ..., default: <string (base)>})
+- Or an Object of the format ({\<fileExtension\>: \<string (base)\>, ..., default: \<string (base)\>})
 ```javascript
     base: {
         ts: 'resources/js/ts/', // per file extension  mapping
