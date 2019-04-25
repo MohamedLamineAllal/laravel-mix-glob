@@ -521,7 +521,10 @@ const mixGlob = MixGlob({
     }
 });
 ```
-## an explicative video
+
+## An explicative video
+
+
 
 ## Issues and features requests
 Don't hesitate to fill an issue for any bug, or feature request. 
