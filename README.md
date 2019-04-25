@@ -331,7 +331,7 @@ mixGlob.sass(
         ]
     },
     {
-        base: 'resources/stylus // laravel-mix-glob options
+        base: 'resources/stylus' // laravel-mix-glob options
     }
 )
 .mix('options')({ // quick use of (options)
