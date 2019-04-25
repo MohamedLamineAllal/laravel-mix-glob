@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/secondPattern/ok.compile.js":
-/*!**************************************************!*\
-  !*** ./resources/js/secondPattern/ok.compile.js ***!
-  \**************************************************/
+/***/ "./resources/js/secondPattern/anotherfile_secondparam.compile.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/secondPattern/anotherfile_secondparam.compile.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
+console.log('hi');
 
 /***/ }),
 
-/***/ 8:
-/*!********************************************************!*\
-  !*** multi ./resources/js/secondPattern/ok.compile.js ***!
-  \********************************************************/
+/***/ 5:
+/*!*****************************************************************************!*\
+  !*** multi ./resources/js/secondPattern/anotherfile_secondparam.compile.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/ok.compile.js */"./resources/js/secondPattern/ok.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/anotherfile_secondparam.compile.js */"./resources/js/secondPattern/anotherfile_secondparam.compile.js");
 
 
 /***/ })

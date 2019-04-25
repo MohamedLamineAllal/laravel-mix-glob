@@ -81,30 +81,54 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/secondPattern/ok.compile.js":
-/*!**************************************************!*\
-  !*** ./resources/js/secondPattern/ok.compile.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./resources/js/ts/ts_test.compile.ts":
+/*!********************************************!*\
+  !*** ./resources/js/ts/ts_test.compile.ts ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+console.log('hi there typescript');
+var multiply = function (n) { return 2 * n; };
+console.log(multiply(2));
+/* harmony default export */ __webpack_exports__["default"] = (multiply);
 
 
 /***/ }),
 
-/***/ 8:
-/*!********************************************************!*\
-  !*** multi ./resources/js/secondPattern/ok.compile.js ***!
-  \********************************************************/
+/***/ "./resources/js/ts/ts_test.compile.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/ts/ts_test.compile.tsx ***!
+  \*********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ts_test_compile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ts_test.compile */ "./resources/js/ts/ts_test.compile.ts");
+
+console.log('hi there typescript');
+console.log(Object(_ts_test_compile__WEBPACK_IMPORTED_MODULE_0__["default"])(2));
+
+
+/***/ }),
+
+/***/ 20:
+/*!****************************************************************************************!*\
+  !*** multi ./resources/js/ts/ts_test.compile.ts ./resources/js/ts/ts_test.compile.tsx ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/ok.compile.js */"./resources/js/secondPattern/ok.compile.js");
+__webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/ts_test.compile.ts */"./resources/js/ts/ts_test.compile.ts");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/ts_test.compile.tsx */"./resources/js/ts/ts_test.compile.tsx");
 
 
 /***/ })

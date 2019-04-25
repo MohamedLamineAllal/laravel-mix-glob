@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/secondPattern/ok.compile.js":
-/*!**************************************************!*\
-  !*** ./resources/js/secondPattern/ok.compile.js ***!
-  \**************************************************/
+/***/ "./resources/js/ts/superhergum.compile.ts":
+/*!************************************************!*\
+  !*** ./resources/js/ts/superhergum.compile.ts ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
+throw new Error("Module build failed (from ./node_modules/ts-loader/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/superhergum.compile.ts'");
 
 /***/ }),
 
-/***/ 8:
-/*!********************************************************!*\
-  !*** multi ./resources/js/secondPattern/ok.compile.js ***!
-  \********************************************************/
+/***/ 18:
+/*!******************************************************!*\
+  !*** multi ./resources/js/ts/superhergum.compile.ts ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/ok.compile.js */"./resources/js/secondPattern/ok.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/superhergum.compile.ts */"./resources/js/ts/superhergum.compile.ts");
 
 
 /***/ })

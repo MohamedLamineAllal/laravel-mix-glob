@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/secondPattern/ok.compile.js":
-/*!**************************************************!*\
-  !*** ./resources/js/secondPattern/ok.compile.js ***!
-  \**************************************************/
+/***/ "./resources/js/secondPattern/newoke.compile.js":
+/*!******************************************************!*\
+  !*** ./resources/js/secondPattern/newoke.compile.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -98,13 +98,13 @@
 /***/ }),
 
 /***/ 8:
-/*!********************************************************!*\
-  !*** multi ./resources/js/secondPattern/ok.compile.js ***!
-  \********************************************************/
+/*!************************************************************!*\
+  !*** multi ./resources/js/secondPattern/newoke.compile.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/ok.compile.js */"./resources/js/secondPattern/ok.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/newoke.compile.js */"./resources/js/secondPattern/newoke.compile.js");
 
 
 /***/ })

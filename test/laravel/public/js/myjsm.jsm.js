@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/secondPattern/ok.compile.js":
-/*!**************************************************!*\
-  !*** ./resources/js/secondPattern/ok.compile.js ***!
-  \**************************************************/
+/***/ "./resources/js/myjsm.compile.jsm":
+/*!****************************************!*\
+  !*** ./resources/js/myjsm.compile.jsm ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/myjsm.compile.jsm'");
 
 /***/ }),
 
-/***/ 8:
-/*!********************************************************!*\
-  !*** multi ./resources/js/secondPattern/ok.compile.js ***!
-  \********************************************************/
+/***/ 3:
+/*!**********************************************!*\
+  !*** multi ./resources/js/myjsm.compile.jsm ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/ok.compile.js */"./resources/js/secondPattern/ok.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/myjsm.compile.jsm */"./resources/js/myjsm.compile.jsm");
 
 
 /***/ })

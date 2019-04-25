@@ -81,30 +81,51 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/secondPattern/ok.compile.js":
-/*!**************************************************!*\
-  !*** ./resources/js/secondPattern/ok.compile.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./resources/js/secondPattern/importme.js":
+/*!************************************************!*\
+  !*** ./resources/js/secondPattern/importme.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+console.log('import me !!!!');
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  console.log('import me !!!!');
+});
 
 /***/ }),
 
-/***/ 8:
-/*!********************************************************!*\
-  !*** multi ./resources/js/secondPattern/ok.compile.js ***!
-  \********************************************************/
+/***/ "./resources/js/secondPattern/secondParamTest.compile.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/secondPattern/secondParamTest.compile.js ***!
+  \***************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _importme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./importme */ "./resources/js/secondPattern/importme.js");
+
+console.log('HI there second pattern');
+Object(_importme__WEBPACK_IMPORTED_MODULE_0__["default"])();
+
+/***/ }),
+
+/***/ 13:
+/*!*********************************************************************!*\
+  !*** multi ./resources/js/secondPattern/secondParamTest.compile.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/ok.compile.js */"./resources/js/secondPattern/ok.compile.js");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/secondPattern/secondParamTest.compile.js */"./resources/js/secondPattern/secondParamTest.compile.js");
 
 
 /***/ })

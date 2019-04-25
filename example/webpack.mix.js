@@ -1,6 +1,7 @@
 const MixGlob = require('../dist/mixGlob.min.js');
+const mix = require('laravel-mix');
 
-mixGlob = new MixGlob();
+mixGlob = new MixGlob({mix});
 
 mixGlob.sass('resources/sass/**/*.compile.scss', 'public/css', null, {
     base: 'resources/sass/',
