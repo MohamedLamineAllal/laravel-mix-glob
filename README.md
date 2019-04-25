@@ -122,9 +122,10 @@ Just a quick overview.
 
 [Various patterns and expected matches.](https://github.com/sindresorhus/multimatch/blob/master/test/test.js)
 
+
 ## Mapping
 
-### The mapping and why:
+### The mapping and why
 
 laravel-mix-glob internally need to map the extensions to provide the specifier feature.
 Having a flexibility on the mapping can be interesting. Sadely laravel-mix doesn't support outputing to other format then default. (most of the extension mapping api is quiet useless for now).
