@@ -9,7 +9,7 @@ A wrapper above laravel-mix that add support for globs.
 >
 > Know that it is more well tested on Linux then Windows. If you find any problem let me know. (I'm ready to work on any issues and problems. And any contribution is appreciated.)
 >
-> Don't forget to start the project. :heartbeat: :heart:
+> Don't forget to star the project. :heartbeat: :heart:
 > ::::::::::::::::
 
 
@@ -158,13 +158,7 @@ There is three way to provide the mapping. An option in construction (byFunc or 
 For **precedency**. the in function mapping is used. If not provided the byExt in constructor mapping. Otherwise byFunc in extension. Otherwise the default is used.
 You can see examples in the examples section bellow.
 
-## Methods parameters:
-Laravel mix above functions have the following signature `(input, output, mixOptions)`.  MixGlob change that to `(glob, outputDir, mixOptions, mixGlobOptions)`.
 
-Notice that mixOptions are the same as with mix. 
-
-### mixGlobOptions
-------------------
 ## Methods parameters:
 Laravel mix above functions have the following signature `(input, output, mixOptions)`.  MixGlob change that to `(glob, outputDir, mixOptions, mixGlobOptions)`.
 
@@ -208,6 +202,26 @@ function (file, ext, mm) { // mm => micromatch instance
 ```
 - Know too that if the base is ommited, then each file will be directly created in the output directory.
 
+Know too that we can precise that at the intance constructor options. `mapping: {base: { byExt: {}, byFunc: {}}}`.
+For the precedency. The in function take precedency over in constructor. And within constructor `byExt` take precedency over `byFunc`.
+```javascript
+new MixGlob({
+    mix,
+    mapping: {
+        base: {
+            byExt: {
+                tsx: /*string*/,
+                //....
+            },
+            byFunc: {
+                sass: /*value can be any of the three format above (string, object, function) */,
+                js: ,
+                // ....
+            }
+        }
+    }
+})
+```
 
 The `compileSpecifier` option is another important one, that you need to know. You need to know that the specifier by default is enabled. Defaulting to `'compile'`. It's role is to remove this specifier in the output. And the goal is that we can have such a specifier, that allow us to distinguish the files that need to be compiled (the entry point). Then we need to match them in the glob. As shown in the example above.
 The object is defined as bellow
@@ -387,6 +401,37 @@ mixGlob.js('resources/js/**/*.compile.{js,jsm,ts,tsx}', 'public/js', null, {
     }
 });
 ```
+#### base in the instance constructor
+```javascript
+const mixGlob = new MixGlob({
+    mix,
+    mapping: {
+        base: {
+            byExt: {
+                tsx: 'resources/ts/tsx/',
+                ts: 'resources/ts/'
+            },
+            byFunc: {
+                sass: 'resources/styles',
+                js: (file, ext, mm) => {
+                    if (mm.every(file, 'resources/js/base/**/*.compile.js')) {
+                        return 'resources/js/base';
+                    } else {
+                        return 'resources/js';
+                    }
+                },
+                /**
+                 * object  {
+                 *      ext: '...',
+                 *      //...,
+                 *      default: '...'
+                 * }   /// is supported too
+                 * /
+            }
+        }
+    }
+});
+```
 
 ### specifier option
 #### use a specifier
@@ -446,7 +491,7 @@ mixGlob.ts(['resources/ts/**/*.cmp.ts', 'resources/ts/**/*.cmp.tsx'], 'public/js
 const mixGlob = MixGlob({
     mix, // mix required
     mapping: { // optional
-        mapExt: { // we precise mapExt. Other mapping may be added later
+        ext: { // we precise ext. Other mapping may be added later
             byExt: {
                 tsx: 'jsx',
                 jsx: 'jsx',
@@ -465,8 +510,7 @@ const mixGlob = MixGlob({
 const mixGlob = MixGlob({
     mix, // mix required
     mapping: { // optional
-        mapExt: { // we precise mapExt. Other mapping may be added later
-            byFunc: {
+        ext: { // we precise ext. 
                 js: 'jsm',
                 //...
                 // Note this will be overriding by any mapping provided at functions calls (like mixGlob.sass()|.js()|.ts()...)
@@ -488,6 +532,7 @@ Don't hesitate to fill an issue for any bug, or feature request.
 - Feel free to contact me at allaldevelopment@gmail.com
 - Help test it better.
 - please report (fill issue) for any bug or error. Send the error message. And the context.
+
 :heartbeat: :heart: Don't forget to star it. Share too :heart: :heartbeat:
 
 ## Work to do
@@ -504,5 +549,5 @@ Don't hesitate to fill an issue for any bug, or feature request.
 >
 > Know that it is more well tested on Linux then Windows. If you find any problem let me know. (I'm ready to work on any issues and problems. And any contribution is appreciated.)
 >
-> Don't forget to start the project. :heartbeat: :heart:
+> Don't forget to star the project. :heartbeat: :heart:
 > ::::::::::::::::

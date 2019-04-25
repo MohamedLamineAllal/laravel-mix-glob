@@ -86,25 +86,27 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/ts/newTsFIle.compile.ts":
-/*!**********************************************!*\
-  !*** ./resources/js/ts/newTsFIle.compile.ts ***!
-  \**********************************************/
+/***/ "./resources/js/ts/newTsFIle_ts.compile.ts":
+/*!*************************************************!*\
+  !*** ./resources/js/ts/newTsFIle_ts.compile.ts ***!
+  \*************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/ts-loader/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/newTsFIle.compile.ts'");
+"use strict";
+
+
 
 /***/ }),
 
 /***/ 17:
-/*!****************************************************!*\
-  !*** multi ./resources/js/ts/newTsFIle.compile.ts ***!
-  \****************************************************/
+/*!*******************************************************!*\
+  !*** multi ./resources/js/ts/newTsFIle_ts.compile.ts ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/newTsFIle.compile.ts */"./resources/js/ts/newTsFIle.compile.ts");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/newTsFIle_ts.compile.ts */"./resources/js/ts/newTsFIle_ts.compile.ts");
 
 
 /***/ })

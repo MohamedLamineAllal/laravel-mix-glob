@@ -81,30 +81,53 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/ts/newTsFIle.compile.ts":
-/*!**********************************************!*\
-  !*** ./resources/js/ts/newTsFIle.compile.ts ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./resources/js/ts/ts_test.compile.ts":
+/*!********************************************!*\
+  !*** ./resources/js/ts/ts_test.compile.ts ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/ts-loader/index.js):\nError: ENOENT: no such file or directory, open '/home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/newTsFIle.compile.ts'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+console.log('hi there typescript');
+var multiply = function (n) { return 2 * n; };
+console.log(multiply(2));
+/* harmony default export */ __webpack_exports__["default"] = (multiply);
+
 
 /***/ }),
 
-/***/ 17:
-/*!****************************************************!*\
-  !*** multi ./resources/js/ts/newTsFIle.compile.ts ***!
-  \****************************************************/
+/***/ "./resources/js/tsx/tsx_tsx_test.compile.tsx":
+/*!***************************************************!*\
+  !*** ./resources/js/tsx/tsx_tsx_test.compile.tsx ***!
+  \***************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ts_ts_test_compile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ts/ts_test.compile */ "./resources/js/ts/ts_test.compile.ts");
+
+console.log('hi there typescript');
+console.log(Object(_ts_ts_test_compile__WEBPACK_IMPORTED_MODULE_0__["default"])(2));
+
+
+/***/ }),
+
+/***/ 19:
+/*!*********************************************************!*\
+  !*** multi ./resources/js/tsx/tsx_tsx_test.compile.tsx ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/ts/newTsFIle.compile.ts */"./resources/js/ts/newTsFIle.compile.ts");
+module.exports = __webpack_require__(/*! /home/coderhero/Documents/coderhero/Dev/git/laravel-mix-glob/test/laravel/resources/js/tsx/tsx_tsx_test.compile.tsx */"./resources/js/tsx/tsx_tsx_test.compile.tsx");
 
 
 /***/ })

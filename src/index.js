@@ -38,25 +38,25 @@ const MixGlob = (function () {
         //default specifier = 'compile for all'
         // usage glob => *.compile.ext to check against only compile.ext. . or *.compile.* (all extensions preceded with compile)
         sass: {
-            mapExt: 'css'
+            ext: 'css'
         },
         js: {
-            mapExt: 'js'
+            ext: 'js'
         },
         less: {
-            mapExt: 'css'
+            ext: 'css'
         },
         stylus: {
-            mapExt: 'css'
+            ext: 'css'
         },
         react: {
-            mapExt: 'js'
+            ext: 'js'
         },
         ts: {
-            mapExt: 'js'
+            ext: 'js'
         },
         preact: {
-            mapExt: 'js'
+            ext: 'js'
         }
     }
 
@@ -106,8 +106,8 @@ const MixGlob = (function () {
     function defaultMapExt(mixFunc, mapping) {
         let mixFuncExt = null;
         if (mixFuncs[mixFunc]) {
-            // console.log('=========mixFuncs[funcName].mapExt==========> ', mixFuncs[mixFunc].mapExt);
-            mixFuncExt = mixFuncs[mixFunc].mapExt;
+            // console.log('=========mixFuncs[funcName].ext==========> ', mixFuncs[mixFunc].ext);
+            mixFuncExt = mixFuncs[mixFunc].ext;
         }
         return _mixDefaultMapExt(mixFunc, mapping, mixFuncExt);
     }
@@ -161,7 +161,7 @@ const MixGlob = (function () {
                 .on('unlink', pth => {
                     restartMix.call(this, 'unlink', pth, glb);
                 })
-                .on('unlinkDir',  pth => {
+                .on('unlinkDir', pth => {
                     mglogger.debug('UNLINK DIR CHOKIDAR -------------');
                     restartMix.call(this, 'unlinkDir', pth, glb);
                 })
@@ -174,8 +174,14 @@ const MixGlob = (function () {
         let ext;
         let re_speci;
         let re_ext;
-        let extMapping = (this.mapping.mapExt && this.mapping.mapExt.byExt) || defaultExtMapping; // this mean map any extension to css||... ('otherwise you provide an mapping object)
-        let base = this.mapping.base && (this.mapping.base.byExt || this.mapping.base.byFunc);
+        let extMapping = (this.mapping.ext && this.mapping.ext.byExt) || defaultExtMapping; // this mean map any extension to css||... ('otherwise you provide an mapping object)
+        let base = 
+        this.mapping.base && 
+        (
+            this.mapping.base.byExt || 
+            this.mapping.base.byFunc[mixFuncName]
+        );
+
         let extmap;
         // handling options access
         if (!options) options = {};
@@ -219,8 +225,8 @@ const MixGlob = (function () {
             // //handling extension mapping (and replace)
             // // console.log('==> ext = ', ext);
             re_ext = new RegExp(ext + '$', 'g');
-            mglogger.debug('this.mapping.mapExt.byExt === ');
-            mglogger.debug(this.mapping.mapExt && this.mapping.mapExt.byExt);
+            mglogger.debug('this.mapping.ext.byExt === ');
+            mglogger.debug(this.mapping.ext && this.mapping.ext.byExt);
             extmap = mapExt(ext, extMapping, defaultExtMapping);
 
             // console.log('==> extmap = ', extmap);
@@ -295,7 +301,7 @@ const MixGlob = (function () {
         console.log(pth);
         let pthLogMsg = '';
 
-        switch(reason) {
+        switch (reason) {
             case 'add':
                 pthLogMsg = 'File added :';
                 break;
@@ -476,7 +482,7 @@ const MixGlob = (function () {
                 // console.log((index + ' - ' + mixFunc).yellow);
                 this[mixFunc] = function (glb, output, mixOptions, options) {
                     //[glb1] when you write all the default extensions for all of them tatke it out
-                    const defaultExtMapping = defaultMapExt(mixFunc, this.mapping.mapExt && this.mapping.mapExt.byFunc);
+                    const defaultExtMapping = defaultMapExt(mixFunc, this.mapping.ext && this.mapping.ext.byFunc);
                     // console.log('before mix base glob'.green);
                     // console.log(this);
                     mixBaseGlob.call(this, mixFunc, glb, output, mixOptions, options, defaultExtMapping, !this.shouldWatch);
