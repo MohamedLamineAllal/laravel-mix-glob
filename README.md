@@ -2,15 +2,7 @@
 A wrapper above laravel-mix that add support for globs.
 
 
-> ::::::NOTE::::::
-> UPDATED! new version (See the doc for what's new)
->
-> laravel-mix-glob is newly published, it is however already practical. It's in beta now.  (Filling issuing about any bug or problem. Or even just to Know better. All welcomed. And appreicated.)
->
-> Know that it is more well tested on Linux then Windows. If you find any problem let me know. (I'm ready to work on any issues and problems. And any contribution is appreciated.)
->
 > Don't forget to star the project. :heartbeat: :heart:
-> ::::::::::::::::
 
 
 ## Install
@@ -27,11 +19,11 @@ const MixGlob = require('laravel-mix-glob');
 ## How to use
 Initiate an instance:
 ```js
-const mixGlob = MixGlob({mix}); // mix is required
+const mixGlob = new MixGlob({mix}); // mix is required
 ```
 or with options
 ```js
-const mixGlob = MixGlob({
+const mixGlob = new MixGlob({
     mix, // mix required
     mapping: { // optional
         // will explain that later
@@ -490,7 +482,7 @@ mixGlob.ts(['resources/ts/**/*.cmp.ts', 'resources/ts/**/*.cmp.tsx'], 'public/js
 #### Example of precising the mapping by file extension at MixGlob instance construction
 
 ```js
-const mixGlob = MixGlob({
+const mixGlob = new MixGlob({
     mix, // mix required
     mapping: { // optional
         ext: { // we precise ext. Other mapping may be added later
@@ -509,7 +501,7 @@ const mixGlob = MixGlob({
 #### Example of precising the mapping by functions at MixGlob instance construction
 
 ```js
-const mixGlob = MixGlob({
+const mixGlob = new MixGlob({
     mix, // mix required
     mapping: { // optional
         ext: { // we precise ext. 
