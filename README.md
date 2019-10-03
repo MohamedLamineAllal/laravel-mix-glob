@@ -540,11 +540,4 @@ Don't hesitate to fill an issue for any bug, or feature request.
 - ...
 
 
-> ::::::NOTE::::::
->
-> laravel-mix-glob is newly published, it is however already practical. It's in beta now.  (Filling issuing about any bug or problem. Or even just to Know better. All welcomed. And appreicated.)
->
-> Know that it is more well tested on Linux then Windows. If you find any problem let me know. (I'm ready to work on any issues and problems. And any contribution is appreciated.)
->
 > Don't forget to star the project. :heartbeat: :heart:
-> ::::::::::::::::
