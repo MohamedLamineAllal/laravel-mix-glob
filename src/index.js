@@ -9,30 +9,17 @@ const fs = require('fs');
 const debug = require('debug');
 const flatCache = require('flat-cache');
 
-const mglogger = {
+const LOGGER = {
     log: debug('MixGlob'),
     err: debug('MixGlob:Error'),
     debug: debug('MixGlob:debug')
-}
+};
 
-const DEBUG_ENV_VARS = [
-    'DEBUG',
-    'DEBUG_HIDE_DATE',
-    'DEBUG_COLORS',
-    'DEBUG_DEPTH',
-    'DEBUG_SHOW_HIDDEN'
-];
-
-if (noDebugEnvVar()) {
-    debug.enable('MixGlob:debug');
-    mglogger.debug('!!!!! ----- No debug env var ----- !!!!');
-    mglogger.debug('env vars:')
-    mglogger.debug(Object.keys(process.env));
-    debug.enable('MixGlob, MixGlob:*, -MixGlob:debug');
-}
+// setting up logging
+settingUpLogging();
 
 const MixGlob = (function () {
-    mglogger.debug('in MixGlob Module');
+    LOGGER.debug('in MixGlob Module');
 
     var mixFuncs = {
         //default specifier = 'compile for all'
@@ -78,8 +65,8 @@ const MixGlob = (function () {
 
     // map the extension to the provided mapping, if not then to the default, if not then it return the extension itself
     function mapExt(ext, mapping, defaultMapping) { // return false if there is not matching (check for false and take same extension)
-        mglogger.debug('in mapExt');
-        mglogger.debug({
+        LOGGER.debug('mapExt():');
+        LOGGER.debug({
             ext,
             mapping,
             defaultMapping
@@ -98,7 +85,7 @@ const MixGlob = (function () {
 
     function _mixDefaultMapExt(mixFunc, passedMapping, defaultMapping) {
         const ext = mapExt(mixFunc, passedMapping, defaultMapping);
-        // console.error('!!!!!!!!!', ext);
+        LOGGER.debug('_mixDefaultMapExt():\n!!!!!!!!!' + String(ext));
         if (ext) return ext;
         throw 'defaultMapExt: no mapping precised, neither it\'s supported by default';
     }
@@ -106,7 +93,8 @@ const MixGlob = (function () {
     function defaultMapExt(mixFunc, mapping) {
         let mixFuncExt = null;
         if (mixFuncs[mixFunc]) {
-            // console.log('=========mixFuncs[funcName].ext==========> ', mixFuncs[mixFunc].ext);
+            LOGGER.debug('defaultMapExt():\n=========mixFuncs[funcName].ext==========> ');
+            LOGGER.debug(mixFuncs[mixFunc].ext);
             mixFuncExt = mixFuncs[mixFunc].ext;
         }
         return _mixDefaultMapExt(mixFunc, mapping, mixFuncExt);
@@ -115,42 +103,38 @@ const MixGlob = (function () {
 
 
     function mixBaseGlob(mixFuncName, glb, output, mixOptions, options, defaultExtMapping, noWatch) { // this should refer to the MixGlob instance.
-        mglogger.debug('mixBaseGlob ==='.bgBlue);;
-        mglogger.log('mix function: %s'.yellow, mixFuncName);
-        mglogger.log('Glob: '.yellow + glb)
+        LOGGER.debug('mixBaseGlob ==='.bgBlue);;
+        LOGGER.log('mix function: %s'.yellow, mixFuncName);
+        LOGGER.log('Glob: '.yellow + glb)
 
         let files;
         try {
             files = globbyResolve(glb);
         } catch (err) {
-            mglogger.err(err);
+            LOGGER.err(err);
             return;
         }
-        mglogger.log('Matched files ===='.green);
-        mglogger.log(files);
+        LOGGER.log('Matched files ===='.green);
+        LOGGER.log(files);
 
         this.watchedFiles = [
             ...this.watchedFiles,
             ...files.filter(file => !this.watchedFiles.includes(file))
         ];
-        mglogger.log('Total handled files :'.cyan);
-        mglogger.log(this.watchedFiles);
-
+        
         this.watchedGlobs = [
             ...this.watchedGlobs,
             glb
         ];
 
         if (!noWatch) {
-            mglogger.debug('! NO WATCH ENTERED !!!!!!!!!!!!! -------');
-            // if (this.watcher) {
-            //     mglogger.debug('watching ==+>'.blue);
-            //     mglogger.debug(glb);
-            //     this.watcher.add(glb);
-            // } else {
-            mglogger.debug('watching ==first+>'.blue);
-            mglogger.debug(glb.yellow);
+            /**
+             * Watch for files and directories
+             */
+            LOGGER.debug('! NO WATCH ENTERED !!!!!!!!!!!!! -------');
 
+            LOGGER.debug('watching ==first+>'.blue);
+            LOGGER.debug(glb.yellow);
 
             this.watchers.push(chokidar.watch(glb, {
                     ignoreInitial: true
@@ -162,7 +146,7 @@ const MixGlob = (function () {
                     restartMix.call(this, 'unlink', pth, glb);
                 })
                 .on('unlinkDir', pth => {
-                    mglogger.debug('UNLINK DIR CHOKIDAR -------------');
+                    LOGGER.debug('UNLINK DIR CHOKIDAR -------------');
                     restartMix.call(this, 'unlinkDir', pth, glb);
                 })
             );
@@ -187,7 +171,7 @@ const MixGlob = (function () {
         if (!options) options = {};
         if (!options.compileSpecifier) options.compileSpecifier = {};
 
-        //handling globale opational values (with default)
+        //handling global optional values (with default)
 
         if (!options.compileSpecifier.disabled) { // if not disabled, the we set the regex that correspond to it, depending on the specifier
             let specifier = 'compile';
@@ -206,7 +190,6 @@ const MixGlob = (function () {
             base = options.base
         }
 
-        // [to do] add verbose option (to show elegantly what files where treated)
         files.forEach((file) => {
             ext = path.extname(file).substr(1);
 
@@ -225,49 +208,44 @@ const MixGlob = (function () {
             // //handling extension mapping (and replace)
             // // console.log('==> ext = ', ext);
             re_ext = new RegExp(ext + '$', 'g');
-            mglogger.debug('this.mapping.ext.byExt === ');
-            mglogger.debug(this.mapping.ext && this.mapping.ext.byExt);
+            LOGGER.debug('this.mapping.ext.byExt === ');
+            LOGGER.debug(this.mapping.ext && this.mapping.ext.byExt);
             extmap = mapExt(ext, extMapping, defaultExtMapping);
 
-            // console.log('==> extmap = ', extmap);
+            LOGGER.debug('==> extmap = ' + String(extmap));
             if (ext && ext !== extmap) {
                 fl = fl.replace(re_ext, extmap);
             }
-            // console.log('--->');
-
-            // console.log('==> fl = ', fl);
+            
             out = path.join(output, fl);
-            mglogger.debug('out ======'.bgGreen);
-            console.log({
-                fl,
+            LOGGER.debug('out ======'.bgGreen);
+            LOGGER.log({
+                file: fl,
                 out
             });
-            // var out = path.dirname(path.join(output, fl));
-            //    console.dir(this.mix);
+            
             if (mixOptions) {
-                // console.log(mixFuncName);
-                // console.log('mixInst =='.green);
-                // console.log(this.mixInst);
                 this.mixInst = this.mixInst[mixFuncName](file, out, mixOptions);
-                // console.log('done');
             } else {
-                // console.log(mixFuncName);
-                // console.log('mixInst =nop='.green);
-                // console.log(this.mixInst);
                 this.mixInst = this.mixInst[mixFuncName](file, out);
-                // console.log('done');
             }
-            mglogger.debug(`mix ${mixFuncName} func exec`.yellow);
-            mglogger.debug({
+            LOGGER.debug(`mix ${mixFuncName} func exec`.yellow);
+            LOGGER.debug({
                 file,
                 out,
                 mixOptions
             });
-
-            // console.log('fl = ', fl);
-            // console.log('file = ', file);
-            // console.log('out = ', out);
         });
+
+        // print total handled files
+        if (this.totalHandledFilesLogTimeout) {
+            clearTimeout(this.totalHandledFilesLogTimeout);
+        }
+
+        this.totalHandledFilesLogTimeout = setTimeout(function () {
+            LOGGER.log('Total handled files :'.cyan);
+            LOGGER.log(this.watchedFiles);
+        }.bind(this), 50);
     }
 
 
@@ -318,17 +296,17 @@ const MixGlob = (function () {
             this.onRestart = true;
             try {
                 if (mm.every(pth, glb)) {
-                    mglogger.log(pthLogMsg.bgBlue);
-                    mglogger.log(pth.yellow);
-                    mglogger.log('Corresponding watcher glob: '.bgBlue);
-                    mglogger.log(glb);
-                    mglogger.debug(this.watchedGlobs);
-                    mglogger.log('restart...'.cyan);
+                    LOGGER.log(pthLogMsg.bgBlue);
+                    LOGGER.log(pth.yellow);
+                    LOGGER.log('Corresponding watcher glob: '.bgBlue);
+                    LOGGER.log(glb);
+                    LOGGER.debug(this.watchedGlobs);
+                    LOGGER.log('restart...'.cyan);
 
                     this.cache.setKey('is_subprocess', true);
                     this.cache.save();
-                    mglogger.debug('is_subprocess = ')
-                    mglogger.debug(this.cache.getKey('is_subprocess'));
+                    LOGGER.debug('is_subprocess = ')
+                    LOGGER.debug(this.cache.getKey('is_subprocess'));
 
                     const subprocess = spawn("npm", ['run', this.shouldWatch], {
                         detached: true,
@@ -336,20 +314,16 @@ const MixGlob = (function () {
                         cwd: process.cwd()
                     });
 
-                    // mglogger.debug('Before processPersist_addPID :');
-                    // mglogger.debug('pid = ' + subprocess.pid);
-                    // const pid = subprocess.pid;
-
                     subprocess.on('error', (err) => {
-                        mglogger.debug('subprocess.on(error)');
-                        mglogger.err(err);
+                        LOGGER.debug('subprocess.on(error)');
+                        LOGGER.err(err);
                         this.cache.setKey('is_subprocess', false);
                         this.cache.save();
                     });
 
                     subprocess.unref();
 
-                    mglogger.debug('pid ==== ' + subprocess.pid);
+                    LOGGER.debug('pid ==== ' + subprocess.pid);
 
                     this.pidsList = [subprocess.pid];
                     this.cache.setKey('pids', this.pidsList);
@@ -361,28 +335,17 @@ const MixGlob = (function () {
                     }, 1000)
                 }
             } catch (err) {
-                mglogger.err(err);
+                LOGGER.err(err);
             }
         }
     }
 
 
-
-    // make a function like for extMapping
-    //but for mixFunc (if there is a precised mapping, we use that, if not we use the default mapping, if not available (didn't support one of the mixFunc) error will be thrown)
-
-    // console.dir(mix);
-    // for (var property in mix) {
-    //     if (!mix.hasOwnProperty(property)) continue;
-    //     console.log(property);
-    //     // Do stuff...
-    // }
-
     function MixGlob(options) {
-        mglogger.debug('Mix glob constructor');
-        mglogger.debug('Mix glob constructor: argv =');
-        mglogger.debug(process.argv);
-        mglogger.log('Mix glob'.yellow);
+        LOGGER.debug('Mix glob constructor');
+        LOGGER.debug('Mix glob constructor: argv =');
+        LOGGER.debug(process.argv);
+        LOGGER.log('Mix glob'.yellow);
 
         this.cache = flatCache.load('laravel-mix-glob');
 
@@ -390,20 +353,17 @@ const MixGlob = (function () {
         if (!this.shouldWatch) {
             this.shouldWatch = process.argv.some(arg => arg.includes('hot')) ? 'hot' : false;
         }
-        // console.log('process!!'.bgBlue);
-        // console.log(process);
 
         if (this.shouldWatch && process && process.stdout) {
-            // console.log('stdout ======'.red);
-            mglogger.debug({
+            LOGGER.debug({
                 pidscache: this.cache.getKey('pids'),
                 is_subprocess_cache: this.cache.getKey('is_subprocess')
             });
             this.pidsList = this.cache.getKey('pids') || [];
             this.is_subprocess = this.cache.getKey('is_subprocess') || false;
 
-            mglogger.debug('READ FROM CACHE');
-            mglogger.debug({
+            LOGGER.debug('READ FROM CACHE');
+            LOGGER.debug({
                 pidsList: this.pidsList,
                 is_subprocess: this.is_subprocess
             });
@@ -427,13 +387,13 @@ const MixGlob = (function () {
             process.stdout.on('data', (data) => {
                 data = data.toString();
                 if (this.is_subprocess) {
-                    mglogger.log("To quit type 'c' multiple times".bgBlue);
-                    mglogger.debug(`'${data}'`);
+                    LOGGER.log("To quit type 'c' multiple times".bgBlue);
+                    LOGGER.debug(`'${data}'`);
                     if (data === 'c' || data === 'C') {
-                        mglogger.debug('ENTERED data === "c" || "C"');
+                        LOGGER.debug('ENTERED data === "c" || "C"');
 
-                        mglogger.log('closing ...'.green);
-                        mglogger.log('pids '.cyan + JSON.stringify(this.pidsList).yellow);
+                        LOGGER.log('closing ...'.green);
+                        LOGGER.log('pids '.cyan + JSON.stringify(this.pidsList).yellow);
 
                         this.cache.setKey('pids', []);
                         this.cache.save();
@@ -442,24 +402,22 @@ const MixGlob = (function () {
                             try {
                                 process.kill(pid, 'SIGINT');
                             } catch (err) {
-                                mglogger.err('Error killing pid '.red + pid);
+                                LOGGER.err('Error killing pid '.red + pid);
                             }
                         });
 
-
-
-                        mglogger.log('closed! CONTROL+C now'.blue);
+                        LOGGER.log('closed! CONTROL+C now'.blue);
 
                         process.exit(0);
                     }
                 } else {
-                    mglogger.log("CONTROL+C to exit".bgBlue + '  (twice)');
+                    LOGGER.log("CONTROL+C to exit".bgBlue + '  (twice)');
                 }
             });
             process.on('SIGINT', () => {
                 setTimeout(() => {
                     if (this.is_subprocess) {
-                        mglogger.log('SIGINT'.bgRed);
+                        LOGGER.log('SIGINT'.bgRed);
                         process.exit(0);
                     }
                 }, 2000);
@@ -478,8 +436,6 @@ const MixGlob = (function () {
 
         Object.keys(this.mixInst).forEach((mixFunc, index) => {
             if (!(['mix', 'config', 'scripts', 'styles'].includes(mixFunc))) {
-                //[glb1] <<<====
-                // console.log((index + ' - ' + mixFunc).yellow);
                 this[mixFunc] = function (glb, output, mixOptions, options) {
                     //[glb1] when you write all the default extensions for all of them tatke it out
                     const defaultExtMapping = defaultMapExt(mixFunc, this.mapping.ext && this.mapping.ext.byFunc);
@@ -490,11 +446,6 @@ const MixGlob = (function () {
                 }.bind(this);
             }
         });
-
-        // console.log('this ===='.bgBlue);
-        // console.log(this);
-
-        // this.mix
     }
 
     (function (p) {
@@ -516,13 +467,40 @@ const MixGlob = (function () {
     return MixGlob;
 })();
 
-function noDebugEnvVar() {
-    for (const envVar of Object.keys(process.env)) {
-        if (DEBUG_ENV_VARS.includes(envVar)) {
-            return false;
+function settingUpLogging() {
+    // Debug mode
+    if (process.env.DEBUG) {
+        const debugStr = process.env.DEBUG.toLowerCase().trim();
+        if (debugStr === '1' || debugStr === 'true') {
+            debug.enable('MixGlob, MixGlob:Error, MixGlob:debug');
+        }
+    } else {
+        // No debug mode
+        debug.enable('MixGlob, MixGlob:Error');
+    }
+
+    // Handling Logging tweaking flags
+    const debugTweakingEnvFlags = [
+        'DEBUG_HIDE_DATE',
+        'DEBUG_COLORS',
+        'DEBUG_DEPTH',
+        'DEBUG_SHOW_HIDDEN'
+    ];
+
+    /**
+     *  Flags:
+     *     'LOG_HIDE_DATE',
+     *     'LOG_COLORS',
+     *     'LOG_DEPTH',
+     *     'LOG_SHOW_HIDDEN'
+     *  will apply the same as the DEBUG_ equivalent
+     */
+    for (const debugTweakFlag of debugTweakingEnvFlags) {
+        const logTweakFlagEquiv = debugTweakFlag.replace('DEBUG', 'LOG');
+        if (process.env[logTweakFlagEquiv]) {
+            process.env[debugTweakFlag] = process.env[logTweakFlagEquiv];
         }
     }
-    return true;
 }
 
 module.exports = MixGlob;

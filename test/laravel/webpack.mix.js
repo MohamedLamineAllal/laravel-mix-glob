@@ -1,6 +1,8 @@
 require('colors')
 const mix = require('laravel-mix');
 console.log('webpcak mix start'.bgCyan);
+
+// process.env.DEBUG=true;
 const MixGlob = require('./../../dist/laravelMixGlob.min.js');
 
 console.log("webpack mix ".yellow);

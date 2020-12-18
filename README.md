@@ -1,6 +1,5 @@
 # laravel-mix-glob
-A wrapper above laravel-mix that add support for globs.
-
+A laravel-mix extension that add support for globs.
 
 > Don't forget to star the project. :heartbeat: :heart:
 
@@ -516,9 +515,53 @@ const mixGlob = new MixGlob({
 
 ## An explicative video
 
+## LOGGING AND DEBUGGING
+
+Laravel-mix-glob use [**debug**](https://github.com/visionmedia/debug) module for it's logging! With `MixGlob` domaine for log. And `MixGlob:error` domaine for error. And `MixGlob:debug` domaine for debug.
+
+### Debugging logs
+
+To activate debugging logs, you have to set the env var `DEBUG` to `"true"` or `"1"`. And that's the simplest way!
+
+Otherwise you can set `DEBUG` to anything you want! Following **debug** module syntax!
+
+ex: `DEBUG=*`
+
+One may need to do that if he to see the logs of all packages that are working with **debug** module. However if `DEBUG=1` or `DEBUG=true` were used! Only MixGlob logging will run. And that's the simplest form! You don't even need to know about the **debug** module.
+
+**Where to set the env variable for debugging ?**
+You can set the env var either at the script launch. And that would be on **package.json**  `developement` script!
+
+Or because it's just debugging! One can simply add this in `webpack.mix.js` before requiring **laravel-mix-glob**
+
+```js
+process.env.DEBUG=true; // 1 works too
+const MixGlob = require('laravel-mix-glob');
+```
+
+### Logging tweaking
+
+There is some tweaks for the logging format! Those logging tweaks are described by this from **debug** doc ([here](https://github.com/visionmedia/debug#environment-variables)):
+
+| Name      | Purpose                                         |
+|-----------|-------------------------------------------------|
+| `DEBUG_HIDE_DATE` | Hide date from debug output (non-TTY).  |
+| `DEBUG_COLORS`| Whether or not to use colors in the debug output. |
+| `DEBUG_DEPTH` | Object inspection depth.                    |
+| `DEBUG_SHOW_HIDDEN` | Shows hidden properties on inspected objects. |
+
+Better aliases are available:
+
+| Name      | Purpose                                         |
+|-----------|-------------------------------------------------|
+| `LOG_HIDE_DATE` | Hide date from debug output (non-TTY).  |
+| `LOG_COLORS`| Whether or not to use colors in the debug output. |
+| `LOG_DEPTH` | Object inspection depth.                    |
+| `LOG_SHOW_HIDDEN` | Shows hidden properties on inspected objects. |
 
 
 ## Issues and features requests
+
 Don't hesitate to fill an issue for any bug, or feature request. 
 (It's in Beta, though tested and work well in linux, less tested in windows. Helping fix any potential bugs is very requested.). More test are needed, to cover more functions.  
 :heartbeat: All contribution are appreciated :heartbeat:
@@ -530,11 +573,10 @@ Don't hesitate to fill an issue for any bug, or feature request.
 - Help test it better.
 - please report (fill issue) for any bug or error. Send the error message. And the context.
 
-:heartbeat: :heart: Don't forget to star it. Share too :heart: :heartbeat:
+:heartbeat: :heart: Don't forget to star it. Tell your friends about it too :heart: :heartbeat:
 
 ## Work to do
 - Implement tests
-- concise logging to console. (improvement were done!)
 - more extensive cross platform testing 
 - add filtering functionalities and mapping
 - ...

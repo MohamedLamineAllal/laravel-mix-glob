@@ -16,8 +16,9 @@ function watchTask() {
     watch('src/index.js', series(delayedMinify)); // when a changment happen to one of the files, this will be triggered, but, this get executed after 2000 ms , and only if not other triggering happen, otherwise counting start all over
 }
 
-
 exports.default =  series(watchTask);
+
+exports.build = series(minify);
 
 exports.minify = minify;
 
