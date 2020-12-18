@@ -247,13 +247,14 @@ You need to know that after you add a file and webpack get restarted. Quiting th
 
 ## MixGlob and laravel-mix
 
-MixGlob is just a convenience that add support for globs. It's ment to be used along laravel-mix. All the functions of laravel-mix are exported to MixGlob. But only the one on the default mapping above are supposed to work. For the rest it's not tested yet. And some work is to be done. it's in beta for now. If you get any errors. Use the laravel-mix instance and the usual flow. Also that apply for the functions that doesn't need globs. (Don't histate to fill any issue :heartbeat:)
+MixGlob is just a convenience that add support for globs. It's ment to be used along laravel-mix. All the functions of laravel-mix are exported to MixGlob. But only the one on the default mapping above are supposed to work. For the rest it's not tested yet. And some work may needs to be done. If you get any errors. Use the laravel-mix instance and the usual flow. Also that apply for the functions that doesn't need globs. (Don't hesitate to fill any issue :heartbeat:)
 
 ## examples
 
 ### Globs
 
 #### one string pattern
+
 ```javascript
 mixGlob.sass('resources/sass/**/*.compile.scss', 'public/css', { outputStyle: 'expanded' }, {
     base: 'resources/sass/',
@@ -562,8 +563,7 @@ Better aliases are available:
 
 ## Issues and features requests
 
-Don't hesitate to fill an issue for any bug, or feature request. 
-(It's in Beta, though tested and work well in linux, less tested in windows. Helping fix any potential bugs is very requested.). More test are needed, to cover more functions.  
+Don't hesitate to fill an issue for any bug, or feature request.
 :heartbeat: All contribution are appreciated :heartbeat:
 
 ## contribution
