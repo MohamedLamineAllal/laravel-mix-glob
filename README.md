@@ -520,7 +520,7 @@ const mixGlob = new MixGlob({
 
 Laravel-mix-glob use [**debug**](https://github.com/visionmedia/debug) module for it's logging! With `MixGlob` domaine for log. And `MixGlob:error` domaine for error. And `MixGlob:debug` domaine for debug.
 
-### Debugging logs
+### Debugging logs
 
 To activate debugging logs, you have to set the env var `DEBUG` to `"true"` or `"1"`. And that's the simplest way!
 
@@ -531,6 +531,7 @@ ex: `DEBUG=*`
 One may need to do that if he to see the logs of all packages that are working with **debug** module. However if `DEBUG=1` or `DEBUG=true` were used! Only MixGlob logging will run. And that's the simplest form! You don't even need to know about the **debug** module.
 
 **Where to set the env variable for debugging ?**
+
 You can set the env var either at the script launch. And that would be on **package.json**  `developement` script!
 
 Or because it's just debugging! One can simply add this in `webpack.mix.js` before requiring **laravel-mix-glob**
@@ -540,7 +541,7 @@ process.env.DEBUG=true; // 1 works too
 const MixGlob = require('laravel-mix-glob');
 ```
 
-### Logging tweaking
+### Logging tweaking
 
 There is some tweaks for the logging format! Those logging tweaks are described by this from **debug** doc ([here](https://github.com/visionmedia/debug#environment-variables)):
 
