@@ -36,6 +36,12 @@ const MixGlob = (function () {
         stylus: {
             ext: 'css'
         },
+        css: {
+            ext: 'css'
+        },
+        postCss: {
+            ext: 'css'
+        },
         react: {
             ext: 'js'
         },
