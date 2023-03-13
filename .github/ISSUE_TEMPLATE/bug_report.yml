@@ -30,7 +30,7 @@ body:
     validations:
       required: false
   - type: textarea
-    id: webpack.mix
+    id: webpackmix
     attributes:
       label: webpack.mix.js config
       render: javascript
