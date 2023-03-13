@@ -10,17 +10,11 @@ body:
          A clear and concise description of what the bug is.
     validations:
       required: true
-  - type: textarea
-    id: config
-    attributes:
-      label: Config
-      description: Paste your `.swcrc` file here.
-      render: json
   - type: input
     id: repro-link
     attributes:
-      label: Playground link
-      description: You can use [swc playground](https://play.swc.rs/) to create a reproduction link, then paste the link here.
+      label: Repro link if possible
+      description: A link to demo github repository that does reproduce the problem.
   - type: textarea
     id: expected-behavior
     attributes:
@@ -40,17 +34,16 @@ body:
     attributes:
       label: webpack.mix.js config
       render: javascript
-  - type: textarea
+  - type: markdown
     id: version
     attributes:
       label: Provide the versions
-      description: |
-        **laravel-mix**|
-        |
-        **laravel-mix-glob**|
-        |
-        **webpack**|
-        |
+      value: |
+        **laravel-mix**
+        
+        **laravel-mix-glob**
+        
+        **webpack**
     validations:
       required: true
   - type: textarea
