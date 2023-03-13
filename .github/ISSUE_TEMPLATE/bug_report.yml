@@ -37,8 +37,8 @@ body:
   - type: markdown
     id: version
     attributes:
-      label: Provide the versions
       value: |
+        ### Provide the versions
         **laravel-mix**
         
         **laravel-mix-glob**
