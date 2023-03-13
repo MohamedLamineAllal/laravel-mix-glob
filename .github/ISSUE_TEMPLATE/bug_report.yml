@@ -40,12 +40,9 @@ body:
       label: Versions
       description: Provide the version of the different mentionned packages
       value: |
-        **laravel-mix**
-        
-        **laravel-mix-glob**
-        
-        **webpack**
-
+        laravel-mix: ,
+        laravel-mix-glob: ,
+        webpack: 
     validations:
       required: true
   - type: textarea
