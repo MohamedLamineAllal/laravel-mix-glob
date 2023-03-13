@@ -1,0 +1,60 @@
+name: Bug Report
+description: Use this to issue any bug, or problem issue. (Not a feature request)
+labels: Bug, bad-behavior
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug or the problem
+      description: |
+         A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Config
+      description: Paste your `.swcrc` file here.
+      render: json
+  - type: input
+    id: repro-link
+    attributes:
+      label: Playground link
+      description: You can use [swc playground](https://play.swc.rs/) to create a reproduction link, then paste the link here.
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expect to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual behavior
+      description: A clear and concise description of actual behavior.
+    validations:
+      required: false
+  - type: textarea
+    id: webpack.mix
+    attributes:
+      label: webpack.mix.js config
+      render: javascript
+  - type: textarea
+    id: version
+    attributes:
+      label: Provide the versions
+      description: |
+        **laravel-mix**|
+        |
+        **laravel-mix-glob**|
+        |
+        **webpack**|
+        |
+    validations:
+      required: true
+  - type: textarea
+    id: addition
+    attributes:
+      label: Additional context
+      placeholder: Add any other context about the problem here.
