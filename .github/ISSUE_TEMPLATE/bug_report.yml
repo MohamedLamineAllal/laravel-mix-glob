@@ -34,7 +34,7 @@ body:
     attributes:
       label: webpack.mix.js config
       render: javascript
-  - type: text area
+  - type: textarea
     id: version
     attributes:
       label: Versions
