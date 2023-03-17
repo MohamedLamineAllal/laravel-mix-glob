@@ -1,0 +1,7 @@
+{
+  "name": "testing-mix-styles",
+  "devDependencies": {
+    "resolve-url-loader": "^5.0.0",
+    "sass-loader": "^12.6.0"
+  }
+}
