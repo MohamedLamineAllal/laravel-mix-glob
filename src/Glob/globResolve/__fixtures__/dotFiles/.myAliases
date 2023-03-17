@@ -1,0 +1,2 @@
+#!/bin/bash
+alias test='echo "hi"'
