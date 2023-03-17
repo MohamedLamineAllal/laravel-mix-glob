@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint-src:
+      glob: '{src/**/*.ts, .eslintrc.json, .prettierrc, lefthook.yml, package.json}'
+      exclude: 'src/**/__fixtures__/**/*.ts'
+      run: npm run lint
+    lint-config:
+      glob: './*.{js,ts}'
+      run: npx eslint {staged_files}
+commit-msg:
+  parallel: true
+  commands:
+    commitlint:
+      run: npx commitlint --edit

@@ -1,0 +1,39 @@
+name: Lint
+
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
+  pull_request:
+
+env:
+  FORCE_COLOR: 2
+  NODE: 16
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm 
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: latest
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3.5.0
+        with:
+          node-version: '${{ env.NODE }}'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run lint
+        run: npm run lint
