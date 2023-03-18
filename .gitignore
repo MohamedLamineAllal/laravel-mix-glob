@@ -4,6 +4,5 @@ dist/
 garbage/
 test_space/
 coverage/
-pnpm-lock.yaml
 mix-manifest.json
 .DS_Store
