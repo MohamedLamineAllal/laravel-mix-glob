@@ -1,43 +1,3 @@
-# laravel-mix-glob
-
-![laravel-mix-glob banner](./imgs/laravel_mix_glob_banner.png)
-
-<div align="center">
-  <a href="https://www.npmjs.org/package/laravel-mix-glob">
-    <img src="https://img.shields.io/npm/v/laravel-mix-glob.svg?style=flat-square" alt="npm version"/>
-  </a>
-  <a href="https://github.com/MohamedLamineAllal/laravel-mix-glob.js/actions?query=workflow%3ACI+branch%3Amain">
-    <img src="https://img.shields.io/github/actions/workflow/status/MohamedLamineAllal/laravel-mix-glob.js/ci.yml?branch=main" alt="Build Status">
-  </a>
-  <a href='https://coveralls.io/github/MohamedLamineAllal/laravel-mix-glob.js?branch=main'>
-    <img src='https://coveralls.io/repos/github/MohamedLamineAllal/laravel-mix-glob.js/badge.svg?branch=main' alt='Coverage Status' />
-  </a>
-  <a href='LICENSE'>
-    <img src='https://img.shields.io/badge/license-MIT-blue.svg?style=flat' alt='Coverage Status' />
-  </a>
-</div>
-
-<div align="center">
-  <a href="https://www.npmjs.com/package/laravel-mix-glob">npm page</a>, 
-  <a href="https://github.com/mohamed-lamine-allal/laravel-mix-glob">repo page</a>,
-  <a href="https://github.com/mohamed-lamine-allal/laravel-mix-glob" style="color: yellow; text-decoration: inherit;">Star me ✨✨✨</a>,
-  <a href="./documentation/Contribution.md" style="color: orange; text-decoration: inherit;">Contribution guide</a>
-</div>
-
-<hr>
-
-The **globs** laravel-mix extension.
-
-> Boost your productivity by globs usage with an extensive and concise api. And dynamic. Configure once and forget about adding the files each time.
-
-This extension add support for globs usage with an extensive concise api. For a more natural boosted productivity and dynamic.
-
-> **V2 is out**. A full re-write. And this document is for it.
-
-Here is the [v1 documentation](./documenation/v1/README.md).
-
-If you used v1. It's advised to migrate toward v2. As it have a more concise api. And more solid flexible system. Plus more fixes or new features. V1 is no more maintained.
-
 ## What's new in v2
 
 - Full re-write using typescript and modularity (cleaner code).
@@ -1267,23 +1227,3 @@ SILENT_LOG
 ```sh
 "watch": "cross-env SILENT_LOG=true npx mix watch"
 ```
-
-## Issues and features requests
-
-Don't hesitate to fill an issue for any bug, or feature request.
-:heartbeat: All contribution are appreciated :heartbeat:
-
-Check the contribution guide bellow.
-
-## Contribution
-
-Read the [contribution guide](./documentation/Contribution.md).
-
-- Be nice.
-- Feel free to fill any issue.
-- Feel free to fill any PR.
-- Please contribute code examples if you see it would help you or others. And files to `documentation/v2/examples` and fill PR's.
-- Show your support by staring the project :heartbeat: => one click away => [let me star ✨✨✨✨✨✨✨✨](https://github.com/MohamedLamineAllal/laravel-mix-glob).
-- Feel free to contact me at allalmohamedlamine@gmail.com
-
-> Don't forget to star ✨ the project. :heartbeat: :heart:. It's a click away => [let me star ✨✨✨✨✨✨✨✨](https://github.com/MohamedLamineAllal/laravel-mix-glob)
