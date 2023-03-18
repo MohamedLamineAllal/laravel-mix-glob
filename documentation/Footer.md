@@ -1,3 +1,11 @@
+## Other laravel mix extensions
+
+Here bellow some extension that are helpful for debugging and logging that i built:
+
+- [laravel-mix-webpack-config](https://www.npmjs.com/package/laravel-mix-webpack-config) to access webpack configuration as object or string unlike `dump()` which only print to console. With extension you can write to file or whatever you want. Check the examples.
+
+- [laravel-mix-listen](https://www.npmjs.com/package/laravel-mix-listen) A laravel mix extension that allow us to listen to Mix internal events. More advanced then laravel-mix-webpack-config. It allow to listen to many events. Including to access webpack config. At different stages. Check the examples.
+
 ## Issues and features requests
 
 Don't hesitate to fill an issue for any bug, or feature request.
