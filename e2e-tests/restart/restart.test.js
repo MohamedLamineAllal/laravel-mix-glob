@@ -1150,9 +1150,6 @@ afterAll(() => {
       metaCache.removeSessionsByIds([session.id]).save();
     });
   }
-  setTimeout(() => {
-    process.kill(process.pid);
-  }, 500);
 });
 
 test('experiments events are happening in expected order', () => {
