@@ -1,0 +1,57 @@
+/*Compiled from sass*/
+
+// Variables
+$primary-color: #2ecc71;
+$secondary-color: #3498db;
+$background-color: #f2f2f2;
+$font-size: 16px;
+
+// Mixins
+@mixin box-shadow($x: 0, $y: 2px, $blur: 4px, $color: rgba(0, 0, 0, 0.3)) {
+  box-shadow: $x $y $blur $color;
+}
+
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Styles
+body {
+  background-color: $background-color;
+  font-size: $font-size;
+}
+
+.container {
+  @include flex-center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.title {
+  font-size: 2em;
+  color: $primary-color;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1.5em;
+  color: $secondary-color;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: $secondary-color;
+  color: #fff;
+  @include box-shadow($y: 0, $blur: 2px);
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+    @include box-shadow($y: 0, $blur: 4px);
+  }
+}

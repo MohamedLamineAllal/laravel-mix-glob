@@ -1,3 +1,8 @@
-.history
-/node_modules/
-package-lock.json
+.history/
+node_modules/
+dist/
+garbage/
+test_space/
+coverage/
+mix-manifest.json
+.DS_Store

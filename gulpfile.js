@@ -1,32 +1,25 @@
-const {series, src, dest, watch} = require('gulp');
-const terser = require('gulp-terser');
-const rename = require('gulp-rename');
-function minify(done) {
-    return src('src/index.js')
-        .pipe(terser())
-        .pipe(rename('laravelMixGlob.min.js'))
-        .pipe(dest('dist/')).on('end', function () {
-            done();
-        });
+const { src, dest, parallel } = require('gulp');
+const concat = require('gulp-concat');
+const replace = require('gulp-replace');
+
+function docsBuildReadme() {
+  return src([
+    './documentation/Header.md',
+    './documentation/v2/README.md',
+    './documentation/Footer.md',
+  ])
+    .pipe(concat('README.md'))
+    .pipe(replace('(../', '(./'))
+    .pipe(dest('.'));
 }
 
-const delayedMinify = delay(minify, 2000);
-
-function watchTask() {
-    watch('src/index.js', series(delayedMinify)); // when a changment happen to one of the files, this will be triggered, but, this get executed after 2000 ms , and only if not other triggering happen, otherwise counting start all over
+function docsCopyContributing() {
+  return src('./documentation/Contribution.md')
+    .pipe(concat('CONTRIBUTING.md'))
+    .pipe(replace('(../', '(./'))
+    .pipe(dest('.'));
 }
 
-exports.default =  series(watchTask);
-
-exports.build = series(minify);
-
-exports.minify = minify;
-
-function delay(cb, ms) {
-    let timer = null;
-
-    return function (done) {
-        clearTimeout(timer);
-        setTimeout(cb.bind(null, done), ms);
-    }
-}
+exports.docBuildReadme = docsBuildReadme;
+exports.docCopyContributing = docsCopyContributing;
+exports.docsBuild = parallel(docsBuildReadme, docsCopyContributing);

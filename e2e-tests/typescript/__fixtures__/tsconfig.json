@@ -1,0 +1,7 @@
+{
+  "extends": "@themagician/tsconfig-react",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": ["./src"]
+}
