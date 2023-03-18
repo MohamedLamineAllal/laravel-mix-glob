@@ -1,6 +1,6 @@
 {
   "name": "laravel-mix-glob",
-  "version": "1.1.8",
+  "version": "2.0.0",
   "description": "Laravel mix extension that add support for globs usage with an extensive concise api. For a more natural boosted productivity and dynamic. Configure once and forget about adding the files each time.",
   "keywords": [
     "laravel",
