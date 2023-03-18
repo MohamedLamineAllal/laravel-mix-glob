@@ -1,0 +1,52 @@
+name: Bug Report
+description: Use this to issue any bug, or problem issue. (Not a feature request)
+labels: Bug, bad-behavior
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug or the problem
+      description: |
+         A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: input
+    id: repro-link
+    attributes:
+      label: Repro link if possible
+      description: A link to demo github repository that does reproduce the problem.
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expect to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual behavior
+      description: A clear and concise description of actual behavior.
+    validations:
+      required: false
+  - type: textarea
+    id: webpackmix
+    attributes:
+      label: webpack.mix.js config
+      render: javascript
+  - type: textarea
+    id: version
+    attributes:
+      label: Versions
+      description: Provide the version of the different mentionned packages
+      value: |
+        laravel-mix: ,
+        laravel-mix-glob: ,
+        webpack: 
+    validations:
+      required: true
+  - type: textarea
+    id: addition
+    attributes:
+      label: Additional context
+      placeholder: Add any other context about the problem here.
