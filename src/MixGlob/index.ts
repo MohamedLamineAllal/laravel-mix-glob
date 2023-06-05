@@ -79,9 +79,11 @@ export class MixGlob {
     const srcArgProcessor = new ArgSrcGlobsProcessor();
     srcArgProcessor.process(args, methodName, originalMethod);
 
-    const globsEvaluations = srcArgProcessor.getGlobsEvaluations();
-
-    if (this.watchingManager.watchingHandler.shouldWatch) {
+    if (
+      this.watchingManager.watchingHandler.shouldWatch &&
+      srcArgProcessor.isEvaluationsValid()
+    ) {
+      const globsEvaluations = srcArgProcessor.getGlobsEvaluations();
       this.watchingManager.watchingHandler
         .watchForGlobs(
           globsEvaluations.map((globEvaluation) => globEvaluation.glob),

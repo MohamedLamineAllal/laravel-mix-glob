@@ -15,9 +15,7 @@
 
 const fs = require('node:fs');
 const path = require('path');
-const fastGlob = require('fast-glob');
-const { runMixCommand, checkOutFiles } = require('../utils');
-const { glb } = require('../../dist/index');
+const { runMixCommand } = require('../utils');
 
 jest.setTimeout(30e3);
 
@@ -52,14 +50,27 @@ test('mix command run correctly', () => {
   expect(execOutput && execOutput.state).toBeTruthy();
 });
 
+test('mix command run successfully with no error', () => {
+  expect(execOutput.state).toBe('success');
+});
+
 test('No `No matched files error`', () => {
-  expect(JSON.stringify(execOutput.data.cause).toLowerCase()).not.toContain(
+  expect(execOutput.data.cause).toBeUndefined();
+  expect(JSON.stringify(execOutput.data).toLowerCase()).not.toContain(
     'Error: No matched files'.toLowerCase(),
   );
 });
 
-test('mix command run successfully with no error', () => {
-  expect(execOutput.state).toBe('success');
+test('Args: `No matched files for the args Glob` message', () => {
+  expect(JSON.stringify(execOutput.data.stdout).toLowerCase()).toContain(
+    'No matched files for the args Glob'.toLowerCase(),
+  );
+});
+
+test('src, out, arg: `No matched files for the Glob of arg of index` message', () => {
+  expect(JSON.stringify(execOutput.data.stdout).toLowerCase()).toContain(
+    'No matched files for the Glob of arg of index'.toLowerCase(),
+  );
 });
 
 test('another task core.js compiled correctly', async () => {
@@ -90,7 +101,3 @@ test('another task core.js compiled correctly', async () => {
     );
   }
 });
-
-// test('Warning message for glob no matching', () => {
-
-// });

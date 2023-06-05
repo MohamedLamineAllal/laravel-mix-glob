@@ -1,3 +1,3 @@
-export function anotherTask {
+export function anotherTask() {
   console.log('Another task running ...');
 }
