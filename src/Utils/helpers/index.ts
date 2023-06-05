@@ -86,3 +86,7 @@ export function ascSortFn(a: number, b: number): number {
 export function stringify<T>(el: T): string {
   return JSON.stringify(el, null, 4);
 }
+
+export function isJest() {
+  return process.env.JEST_WORKER_ID !== undefined;
+}
