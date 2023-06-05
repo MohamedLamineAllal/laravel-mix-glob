@@ -1,6 +1,7 @@
 import { Api as MixApi } from 'laravel-mix';
 import type { EGlobType, Glob } from '@Glob';
 import { globResolve } from '@Glob/globResolve';
+import { LOGGER } from '@Utils/Logger';
 
 interface IProcessArgsResult {
   files: string[];
@@ -19,7 +20,7 @@ export function processArgsGlobCall(
   const files = globResolve(glob.value);
 
   if (files.length === 0) {
-    throw new Error('No matched files for the args Glob');
+    LOGGER.log('No matched files for the args Glob');
   }
 
   files.forEach((file) => {
@@ -31,6 +32,7 @@ export function processArgsGlobCall(
     }
     originalMethod(...args);
   });
+
   return {
     files,
   };

@@ -7,6 +7,8 @@ import { globResolve } from '@Glob/globResolve';
 import { mapSrcFile } from '@MixGlob/OutManager';
 import { loopCartesianProduct } from '@Utils/CartisianProductLoop';
 import { TMapArgsCallback } from '@Glob/types';
+import { LOGGER } from '@Utils/Logger';
+import { checkAllEvaluationsAreValid } from './EvaluationValidation';
 import { IGlobEvaluation, IOutManagerRef } from './types';
 
 /**
@@ -17,8 +19,14 @@ export class ArgSrcGlobsProcessor {
 
   private _outManagerRef?: IOutManagerRef;
 
+  private _isEvaluationsValid = true;
+
   public getGlobsEvaluations(): IGlobEvaluation[] {
     return this._globsEvaluations;
+  }
+
+  public isEvaluationsValid() {
+    return this._isEvaluationsValid;
   }
 
   private _resolveGlobsArguments(args: any[]): void {
@@ -42,9 +50,8 @@ export class ArgSrcGlobsProcessor {
         globEvaluation.evaluations = globEvaluation.files;
 
         if (globEvaluation.files.length === 0) {
-          throw new Error(
-            `No matched files for the Glob of arg of index ${index}`,
-          );
+          LOGGER.log(`No matched files for the Glob of arg of index ${index}`);
+          return;
         }
 
         /**
@@ -85,6 +92,12 @@ export class ArgSrcGlobsProcessor {
     this._resolveGlobsArguments(args);
 
     if (this._globsEvaluations && this._globsEvaluations.length > 0) {
+      if (!checkAllEvaluationsAreValid(this._globsEvaluations)) {
+        LOGGER.debug('EVALUATION NOT VALID: skip execution!');
+        this._isEvaluationsValid = false;
+        return;
+      }
+
       const loopGlobsCartesianProdGen = loopCartesianProduct(
         this._globsEvaluations!.map((evaluation) => evaluation.evaluations),
       );

@@ -1,10 +1,19 @@
+/* eslint-disable no-console */
 import debug from 'debug';
-import { isChildProcess } from '@Utils/helpers';
+import { isChildProcess, isJest } from '@Utils/helpers';
 
 const id = `${isChildProcess() ? 'child' : 'master'}:${process.pid}`;
 
-const LOGGER =
-  process.env.NO_LOG || process.env.SILENT_LOG
+function buildLogger() {
+  if (isJest()) {
+    return {
+      log: console.log.bind(console),
+      err: console.error.bind(console),
+      debug: console.debug.bind(console),
+    };
+  }
+
+  return process.env.NO_LOG || process.env.SILENT_LOG
     ? {
         log: () => {},
         err: () => {},
@@ -15,20 +24,27 @@ const LOGGER =
         err: debug(`MixGlob:Error:${id}`),
         debug: debug(`MixGlob:debug:${id}`),
       };
+}
+
+const LOGGER = buildLogger();
 
 type LoggerType = typeof LOGGER;
 
 function settingUpLogging() {
+  if (isJest()) return;
+
   // Debug mode
   if (process.env.DEBUG) {
     const debugStr = process.env.DEBUG.toLowerCase().trim();
     if (debugStr === '1' || debugStr === 'true') {
       debug.enable('MixGlob:*');
       // debug.enable('MixGlob, MixGlob:Error, MixGlob:debug');
+      console.log('Debug ALLLLLLL is enabled !!!!');
     }
   } else {
     // No debug mode
-    debug.enable('MixGlob, MixGlob:Error');
+    debug.enable(`MixGlob:${id}, MixGlob:Error`);
+    console.log('Debug is enabled !!!!');
   }
 
   // Handling Logging tweaking flags
