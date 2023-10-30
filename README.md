@@ -58,20 +58,82 @@ Remember to star ⭐✨✨✨ after you give it a try. (=> [let me star ✨✨�
 
 ## Install
 
-```
+```bash
 npm i laravel-mix-glob --save-dev
 ```
 
 or
 
-```
+```bash
 npm i laravel-mix-glob@latest --save-dev
 ```
+
 to update to v2 if you are already on v1.
 
 ## Starting example
 
-Javascript and fundamentals
+In place of the bellow with repetition and no dynamic
+
+```js
+mix.postCss('src/styles/file.css', 'dist/styles/file.css', [
+    require('precss')() // your PostCss plugins
+]);
+mix.postCss('src/styles/file2.css', 'dist/styles/file2.css', [
+    require('precss')() // your PostCss plugins
+]);
+// ....
+```
+
+you do:
+
+```js
+mix.postCss(
+  glb.src('./src/styles/**/*.css'),
+  glb.out({
+    baseMap: './src', // base is ./src
+    outMap: './dist', // src/styles/file.css => dist/styles/file.css
+  }),
+  [
+    require('precss')() // your PostCss plugins
+  ]
+);
+```
+
+The argument that is no `glob` type and no `glb.out` type. Would remain the same and through all the possibilities.
+
+And you got the idea. You use globs through such helpers. By using the same old mix api. And same way of chaining.
+
+We can use a specifier (c, compile, ...), to give ourselves the ability to select easily and set easily what to compile and what not.
+
+```js
+mix.postCss(
+  glb.src('./src/styles/**/*.c.css'), // Adding a specifier. Only to make diff between what need to be compiled and what doesn't
+  glb.out({
+    baseMap: './src',
+    outMap: './dist',
+    specifier: 'c', // specifier will be removed. Optional. Allow you to have a specifier so you differentiate what need to be compiled and what doesn't. Just for selection.
+  }), // src/styles/file.c.css => dist/styles/file.css
+  [
+    require('precss')() // your PostCss plugins
+  ]
+);
+```
+
+To clear up what the specifier is see the following illustration, otherwise check specifier section in [glb.out() and OutManager](#glbout-and-outmanager) for a full explanation.
+
+![resources](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_resources.png)
+
+And the output will be
+
+![output](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_output.png)
+
+> Know that this extension provides different ways to use globs through different helpers. The main one is `glb.src(), glb.out()` for src, out calls (most of the time, that's what you would be using). The other one is `glb.args()` to have more dynamic around setting up the args (more advanced usage. You may never need that.). And `glb.arg()` is just like `glb.src()` but for args that are not `src,out` based. There is other helpers. All are in the reference below. After the next example section. You'll get details about each. Skim only through the list of examples below.
+
+Here we go with more examples.
+
+> ✨ For full understanding check [How it works](#how-it-works) and the full reference starting by [glb.src() & glb.out() & glb.arg()](#glbsrc--glbout--glbarg).
+
+Javascript
 
 ```js
 const mix = require('laravel-mix');
@@ -96,11 +158,11 @@ mix.js('./src/noGlobs/some.js', './dist/noGlobs/some.js');
  * with specifier
  */
 mix.js(
-  glb.src('./src/relative/doneWithSrcOut/specifier/**/*.js'), 
+  glb.src('./src/relative/doneWithSrcOut/specifier/**/*.compile.js'), 
   glb.out({
     baseMap: './src',
     outMap: './dist',
-    specifier: 'c',
+    specifier: 'compile',
   })
 );
 
@@ -135,7 +197,7 @@ mix.js(
 
 mix
   .js(
-    glb.src('./src/reactNoArgs/specifier/**/*.jsx'),
+    glb.src('./src/reactNoArgs/specifier/**/*.c.jsx'),
     glb.out({
       baseMap: './src',
       outMap: './dist',
@@ -143,18 +205,77 @@ mix
     }),
   )
   .react();
+```
+
+Typescript
+
+```js
+mix.ts(
+  glb.src('./src/relative/doneWithSrcOut/specifier/**/*.c.ts'),
+  glb.out({
+    baseMap: './src',
+    outMap: './dist',
+    specifier: 'c',
+  })
+);
 
 /**
- *  //////////// arg helper /////////////////
+ * ////////// react tsx ////////////////
  */
+mix
+  .ts(
+    glb.src('./src/reactNoArgs/specifier/**/*.c.tsx'),
+    glb.out({
+      baseMap: './src',
+      outMap: './dist',
+      specifier: 'c',
+    }),
+  )
+  .react();
+```
 
-mix.js(glb.arg('./src/arg/**/*.js'), 'dist/arg');
+```js
+mix
+  .ts(
+    glb.src([
+      './src/relative/doneWithSrcOut/specifier/**/*.c.ts',
+      './src/reactNoArgs/specifier/**/*.c.tsx', // string[] multiple globs patterns 
+    ]),
+    glb.out({
+      baseMap: './src',
+      outMap: './dist',
+      specifier: 'c',
+    }),
+  )
+  .react();
+```
 
+Styling
 
+```js
+// no globs
+mix.sass('./src/styles/noGlobs/style.scss', './dist/styles/noGlobs/')
+// with src out
+    .sass(
+        glb.src('./src/styles/doneWithSrcOut/specifier/**/*.c.scss'),
+        glb.out({
+          baseMap: './src',   
+          outMap: './dist',
+          specifier: 'c',
+        }),
+    );
+```
+
+Example of `glb.args()`
+
+> Know that most of the time, you would need to use `glb.src(), glb.out()` instead.
+> - This is only for advanced need.
+
+```js
 /**
  * ////////// args helper ///////////
  * Dynamically return all args
- * Helpful for conditionally picking up arguments
+ * Helpful for conditionally picking up of arguments
  */
 
 /**
@@ -166,7 +287,7 @@ mix.js(
     let out = path.resolve(
       path.resolve(__dirname, './dist'),
       path.relative(path.resolve(__dirname, './src'), src),
-    );
+    ); // handling the output re-basing
     out = glb.replaceExtension(out, '.js'); // <<<<==== helpers
     out = glb.removeSpecifier(out, 'c'); // <<<<====
     
@@ -190,7 +311,7 @@ mix.js(
 );
 
 /**
- * Args with glb.mapOutput()
+ * ✨✨ Args with glb.mapOutput(), A better helper 🔥🔥
  */
 
 /**
@@ -247,138 +368,13 @@ mix.js(
 );
 ```
 
-Typescript
-
-```js
-mix.ts(
-  glb.src('./src/relative/doneWithSrcOut/specifier/**/*.c.ts'),
-  glb.out({
-    baseMap: './src',
-    outMap: './dist',
-    specifier: 'c',
-  })
-);
-
-/**
- * ////////// react tsx ////////////////
- */
-mix
-  .ts(
-    glb.src('./src/reactNoArgs/specifier/**/*.c.tsx'),
-    glb.out({
-      baseMap: './src',
-      outMap: './dist',
-      specifier: 'c',
-    }),
-  )
-  .react();
-```
-
-The above can be reduced to:
-
-```js
-mix
-  .ts(
-    glb.src([
-      './src/relative/doneWithSrcOut/specifier/**/*.c.ts',
-      './src/reactNoArgs/specifier/**/*.c.tsx', // string[] multiple globs patterns 
-    ]),
-    glb.out({
-      baseMap: './src',
-      outMap: './dist',
-      specifier: 'c',
-    }),
-  )
-  .react();
-```
-
-Styling
-
-```js
-// no globs
-mix.sass('./src/styles/noGlobs/style.scss', './dist/styles/noGlobs/')
-// with src out
-    .sass(
-        glb.src('./src/styles/doneWithSrcOut/specifier/**/*.c.scss'),
-        glb.out({
-          baseMap: './src',   
-          outMap: './dist',
-          specifier: 'c',
-        }),
-    );
-
-// with args
-mix.sass(
-  glb.args('./src/styles/doneWithArgs/specifier/**/*.c.scss', (src) => {
-    let out = path.resolve(
-      path.resolve(__dirname, './dist'),
-      path.relative(path.resolve(__dirname, './src'), src),
-    );
-    // You can make conditional arguments selection ...
-    out = glb.replaceExtension(out, '.css');
-    out = glb.removeSpecifier(out, 'c');
-    return [src, out];
-  }),
-);
-
-// or equiv with glb.mapOutput()
-mix.sass(
-  glb.args('./src/styles/doneWithArgs/specifier/**/*.c.scss', (src) => {
-    const out = glb.mapOutput({
-      src,
-      outConfig: glb.out({
-        baseMap: './src',
-        outMap: './dist',
-        extensionMap: '.css',
-        specifier: 'c'
-      }),
-    });
-    return [src, out];
-  }),
-);
-```
-
-In place of the bellow with repetition and no dynamic
-
-```js
-mix.postCss('src/file.css', 'dist/file.css', [
-    require('precss')() // your PostCss plugins
-]);
-mix.postCss('src/file2.css', 'dist/file2.css', [
-    require('precss')() // your PostCss plugins
-]);
-```
-
-you do:
-
-```js
-mix.postCss(
-  glb.src('./src/styles/**/*.c.css'),
-  glb.out({
-    baseMap: './src',
-    outMap: './dist',
-    specifier: 'c',
-  }),
-  [
-    require('precss')() // your PostCss plugins
-  ]
-);
-```
-
-The argument that is no `glob` type and no `glb.out` type. Would remain the same and through all the possibilities.
-
-
-And you got the idea. You use globs through such helpers. By using the same old api. And same way of chaining.
-
-> Note: The example above are a quick get started. And to show the fundamental. There is more helpers like `glb.array()`. And more details about each of the helpers and how things works on what to follow. Like for instance the notion of cartesian product. The whole redesign was made to make the system more natural. More flexible. And more elegant.
-
 ## How it works
 
 Same functions as before and you use the glob helpers.
 
 You have different helpers. And you go the same as without globs. But now with the new version of the extension, you use the helpers for the arguments to create Glob objects. The extension will automatically detect and handle the calls accordingly. Processing the globs and the cartesian products (The product of the different possibilities in case of more then just one glob argument).
 
-This new design will allow natural flexibility to basically use the glob equivalent to anything u used to do manually before. And with all ease. And that allow the extension to be more independent of laravel-mix updates.
+This new design will allow natural flexibility, and to basically use the glob equivalent to anything u used to do manually before. And with all ease. And that allow the extension to be more independent of laravel-mix updates.
 
 ### Glob and out types and normal types
 
@@ -470,7 +466,7 @@ mix.magic(
 );
 ```
 
-There is no such use case in laravel-mix yet (all functions generally use one file). Unless some extension do it. And in case you use other extensions. Make sure to import `laravel-mix-glob` the last.
+There is no such use case in laravel-mix yet (all functions generally use one file). Unless some extension do it. And in case you use other extensions. Make sure to import `laravel-mix-glob` the last. 🔥🔥
 
 Now the way the above would work. Is that we will have the two spaces `arg0` and `arg2` short for `glb.src('./src/some/**/*.js')` and `glb.arg('./src/family/**/*.fm')`.
 
@@ -514,6 +510,8 @@ The relation between `src` and `out` is resolved naturally as well. For each car
 You can check the details in the specific section about `src and out` in the documentation bellow.
 
 ### glb.src() & glb.out() & glb.arg()
+
+✨✨✨ 🔥🔥
 
 They can be used together.
 
@@ -620,7 +618,6 @@ mix
 
 All files will be mapped to the same `dist` directory in a flat manner.
 
-
 **The `specifier`**
 
 The `specifier` is a feature that help you differentiate files from others. So you can set a specifier in the example above it's `c`. In order to glob match only the files that have the `c` specifier (which can stand for compile). And if you specify the specifier option. The `OutManager` will automatically remove it on the output. `src/some.c.js` => `dist/some.js`.
@@ -641,7 +638,6 @@ with using the specifier. You would only compile and bundle `toCompile1.c.js` an
 Here an illustration in laravel:
 
 ![resources](https://github.com/MohamedLamineAllal/laravel-mix-glob/raw/master/imgs/specifier_resources.png)
-
 
 And the output will be
 
@@ -1144,6 +1140,7 @@ npx mix hot
 ```
 
 ## Globs
+
 laravel-mix-glob use [fast glob](https://github.com/mrmlnc/fast-glob#readme) internally. For full support for auto restart. You can provide the glob as a string or an array.  
 (You can use an object {pattern: \<string\> | \<array\> , options: \<FastGlobOptions\>} or a function that return files (signature: (globResolve) => \<filesList\>) (can be any function, and it take fastGlob resolution function as a parameter, can be used).
 
@@ -1170,6 +1167,7 @@ mix
 ```
 
 ### Globbing patterns
+
 > from globby doc
 
 Just a quick overview.
@@ -1182,7 +1180,6 @@ Just a quick overview.
 
 [Various patterns and expected matches.](https://github.com/sindresorhus/multimatch/blob/master/test/test.js)
 
-
 ## Logging
 
 Logging  was updated in `v2`.
@@ -1190,7 +1187,6 @@ Logging  was updated in `v2`.
 Including for the debugging purpose.
 
 As in the `v1`. The same system with `debug` package remain. The logs within the app have changed. Plus a silent mode was added in response to the [issue 63](https://github.com/MohamedLamineAllal/laravel-mix-glob/issues/63).
-
 
 ## LOGGING AND DEBUGGING
 
@@ -1257,7 +1253,6 @@ Better aliases are available:
 | `LOG_COLORS`| Whether or not to use colors in the debug output. |
 | `LOG_DEPTH` | Object inspection depth.                    |
 | `LOG_SHOW_HIDDEN` | Shows hidden properties on inspected objects. |
-
 
 ### Silent mode (no logging)
 
